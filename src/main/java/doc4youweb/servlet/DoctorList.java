@@ -50,46 +50,5 @@ public class DoctorList extends HttpServlet {
 
 
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // Retrieve form data for a single doctor
-//        String description = request.getParameter("description");
-//        String startTime = request.getParameter("startTime");
-//        String endTime = request.getParameter("endTime");
-//        String fullName = request.getParameter("fullName");
-//        String doctorImage = request.getParameter("doctorImage");
-//        String location = request.getParameter("location");
-//
-//        // Create a Doctor object for the submitted data
-//        Doctor doctor = new Doctor();
-//        doctor.setDescription(description);
-//        doctor.setStartTime(startTime);
-//        doctor.setEndTime(endTime);
-//        doctor.setFullName(fullName);
-//        doctor.setDoctorImage(doctorImage);
-//        doctor.setLocation(location);
-//
-//        // Get or create a list to store multiple doctor objects
-//        List<Doctor> doctors = (List<Doctor>) request.getSession().getAttribute("doctors");
-//        if (doctors == null) {
-//            doctors = new ArrayList<>();
-//            request.getSession().setAttribute("doctors", doctors);
-//        }
-//
-//        // Add the doctor object to the list
-//        doctors.add(doctor);
-//
-//        // Convert the list of doctors to JSON
-//        Gson gson = new Gson();
-//        String json = gson.toJson(doctors);
-//
-//        // Set response content type to JSON
-//        response.setContentType("application/json");
-//
-//        // Write the JSON response to the client
-//        response.getWriter().write(json);
-   // }
 
 }
