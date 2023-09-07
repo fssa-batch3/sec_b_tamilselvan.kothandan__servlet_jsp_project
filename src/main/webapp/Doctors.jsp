@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%@page import="java.util.HashSet"%>
+<%@page import="in.fssa.doc4you.exception.ServiceException"%>
+<%@page import="java.util.Set"%>
+<%@page import="in.fssa.doc4you.service.DoctorService"%>
+<%@page import="in.fssa.doc4you.dto.DoctorDTO"%>
 <html lang="en">
 
 <head>
@@ -8,17 +13,26 @@
     <title>DOC 4 YOU</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 
 <body>
 
-    <!-- header section starts  -->
 
-    <header class="header" id="header">
-
-    </header>
+   <jsp:include page = "header.jsp"></jsp:include>
+   <%
+   DoctorService doctorService = new DoctorService();
+   Set<DoctorDTO> doctors = new HashSet<DoctorDTO>();
+	try {
+		doctors = doctorService.findAllByDoctors();
+		
+     
+	} catch (Exception e) {
+		
+		out.println(e.getMessage());
+	}
+   %>
 
     <section class="doctors" id="doctors">
 
@@ -37,7 +51,19 @@
         </section>
 
         <div class="box-container" id="doctor-list">
-
+<%for ( DoctorDTO doctor:doctors) {
+    
+%>
+    <div class="Box">
+        <a href="./doctor details/doctor details.html?doctor_id=<%= doctor.getDoctorId() %>">
+            <img src="<%= doctor.getDoctorImage()  %>" alt="<%= doctor.getFirstName()+""+doctor.getLastName() %>">
+        </a>
+        <h3><%= doctor.getFirstName()+""+doctor.getLastName()  %></h3>
+        <span><%= doctor.getDepartment() %></span>
+    </div>
+<%
+}
+%>
         </div>
 
     </section>
@@ -47,9 +73,6 @@
 
     </section>
 
-    <script src="../../assets/js/doctor.js"></script>
-    <script src="./../../Components/header.js"></script>
-    <script src="../../Components/footer.js"></script>
 
 </body>
 

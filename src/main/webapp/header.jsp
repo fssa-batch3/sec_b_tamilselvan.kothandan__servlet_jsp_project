@@ -1,7 +1,11 @@
+<%@page import="in.fssa.doc4you.model.User"%>
 <header class="header" id="header">
-<%
-boolean isLogin_in = false;
+<% User user = (User) session.getAttribute("user");
+boolean isLogin_in = user == null;
+
 %>
+
+
 <%
 if (isLogin_in == false) {
 %>
@@ -12,9 +16,9 @@ if (isLogin_in == false) {
 
 
 <nav class="navbar">
-	<a href="index.jsp">Home</a> <a href="index.jsp">services</a> <a
+	<a href="index.jsp">Home</a> <a href="Doctors.jsp">Doctors</a> <a
 		href="About_page.jsp">About</a> <a href="login.jsp">Login</a> <a
-		href="admin_login.jsp">Admin</a> <a href="doctor_login.jsp">Doctor login</a>
+		href="admin_login.jsp">Admin</a> <a href="doctor_login.jsp">Doctor Login</a>
 </nav>
 <div id="menu-btn" class="fas fa-bars"></div>
 
