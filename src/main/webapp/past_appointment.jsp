@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
+    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,56 +12,71 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
 </head>
 
 <body>
 
-    <!-- header section starts  -->
+    <jsp:include page="header.jsp"></jsp:include>
 
-    <header class="header" id="header">
-
-    </header>
+${appointments}
     <section class="home-1">
-
         <h1 class="heading">
             My <span>Appointment</span>
         </h1>
     </section>
+
     <section>
         <div style="overflow-x: auto;">
-            <table id="appointmentTable">
-                <caption></caption>
-                <thead>
+            <table border="1">
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Cancel</th>
+                </tr>
+                <c:forEach items="${appointments}" var="appointment">
                     <tr>
-                        <th>Appointment Date</th>
-                        <th>Doctor Name</th>
-                        <th>Status</th>
-                        <th>Name</th>
+                        <td>${appointment.id}</td>
+                        <td>${appointment.patientName}</td>
+                        <td>${appointment.doctorName}</td>
+                        <td>${appointment.dateOfConsultation}</td>
+                        <td>${appointment.startTime}</td>
+                        <td>${appointment.status}</td>
+                        <td>
+      
+                <form action="cancelAppointment" method="post">
+                    <input type="hidden" name="appointmentId" value="${appointment.id}">
+                    <input type="submit" value="Cancel" disabled>
+                </form>
+            </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Existing table rows -->
-                </tbody>
+                </c:forEach>
             </table>
 
-            <a href="../../index.html" class="btn" style="margin-left: 55rem; margin-top: 4rem;">
-                Home <span class="fas fa-chevron-right"></span> 
-</a>
+            <!-- Check if there are no appointments to display -->
+            <c:if test="${empty appointments}">
+                <p>No past appointments found.</p>
+            </c:if>
+
+            <!-- Add a link to navigate back to the main page or any other relevant pages -->
+            <p>
+                <a href="index.jsp">Back to Main Page</a>
+            </p>
         </div>
     </section>
 
     <section class="footer">
-        <div class="box-container" id="box-container"></div>
+		<jsp:include page="footer.jsp"></jsp:include>
 
-    </section>
+	</section>
 
     <!-- footer section ends -->
     <script src="../../assets/js/script.js"></script>
-    <script src="../../Components/header.js"></script>
     <script src="../../assets/js/past appointment.js"></script>
-    <script src="../../Components/footer.js"></script>
-
 </body>
 
 </html>

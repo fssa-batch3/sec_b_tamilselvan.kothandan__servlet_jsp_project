@@ -10,26 +10,35 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         >
-        <link rel="stylesheet" href="../../assets/css/style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
     </head>
 
     <body>
         <!-- header section starts  -->
 
-        <header class="header" id="header"></header>
+        <<jsp:include page = "header.jsp"></jsp:include>
 
         <!-- header section ends -->
 
         <div class="signin">
             <div class="container">
                 <div class="login">
-                    <form role="form" id="sign-up" onsubmit="signUp(event);">
+                    <form method = "post" role="form" id="sign-up" action="create" >
                         <h1>REGISTER</h1>
                         <hr >
                         <p>Explore the MEDICAL SERVICE!</p>
-                        <label>Name</label>
+                        <label>First name:</label>
                         <input
                             type="text"
+                            name = "first_name"
+                            id="userName"
+                            pattern="[a-zA-Z0-9]+"
+                            placeholder="abc@exampl.com"
+                        >
+                        <label>First name:</label>
+                        <input
+                            type="text"
+                            name = "last_name"
                             id="userName"
                             pattern="[a-zA-Z0-9]+"
                             placeholder="abc@exampl.com"
@@ -40,33 +49,33 @@
                             placeholder="abc@exampl.com"
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             id="email"
+                            name = "email"
                         >
                         <label>Password</label>
                         <span style="color: #0e6453">
                             Note: 1 num, 1 uppercase/lowercase, 8+ char.
                         </span>
                         <input
+                        name = "password"
                             type="password"
                             placeholder="enter your password!"
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             id="password"
                         >
-                        <span id="passwordToggle" class="password-toggle">
-                            <i id="toggleIcon" class="fa fa-eye"></i>
-                          </span>
-                        <label> Confirm Password</label>
-                        <input
-                            type="password"
-                            placeholder="reenter your password!"
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                            required
-                            id="confirm_password"
-                        >
-                        <span id="PasswordToggle" class="password-toggle">
-                            <i id="ToggleIcon" class="fa fa-eye"></i>
-                          </span>
-
-                        <button>Submit</button>
+                        <input type="checkbox" id="isDoctor" name="isDoctor">
+        <label for="isDoctor">Register as a Doctor</label><br>
+        <div id="doctorFields" style="display: none;">
+            <label for="qualifications">Qualifications:</label>
+            <input type="text" id="qualifications" name="qualifications"><br>
+            <label for="experience">Experience:</label>
+            <input type="text" id="experience" name="experience"><br>
+            <label for="department">Department:</label>
+            <input type="text" id="Department" name="department"><br>
+            <label for="doctorimg">Doctor-Image:</label>
+            <input type="text" id="doctorimg" name="doctorimg"><br>
+            <!-- Add more doctor-specific fields as needed -->
+        </div>
+        <input type="submit" value="Register">
                         <p>
                             <a href="../products/login.html">Already a member</a>
                         </p>
@@ -74,12 +83,17 @@
                     </form>
                 </div>
                 <div class="pic">
-                    <img src="../../assets/img/Sign up-bro.png" alt="sign_up image">
+                    <img src="<%= request.getContextPath() %>/assets/img/Sign up-bro.png" alt="sign_up image">
                 </div>
             </div>
         </div>
 
-        <script src="../../assets/js/login and signin .js"></script>
-        <script src="../../Components/header.js"></script>
+<script>
+        // Show/hide doctor fields based on the checkbox
+        document.getElementById("isDoctor").addEventListener("change", function() {
+            var doctorFields = document.getElementById("doctorFields");
+            doctorFields.style.display = this.checked ? "block" : "none";
+        });
+    </script>
     </body>
 </html>

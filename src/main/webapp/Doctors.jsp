@@ -13,7 +13,7 @@
     <title>DOC 4 YOU</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
 
 </head>
 
@@ -55,11 +55,15 @@
     
 %>
     <div class="Box">
-        <a href="./doctor details/doctor details.html?doctor_id=<%= doctor.getDoctorId() %>">
+        <a href="<%= doctor.getDoctorId() %>">
             <img src="<%= doctor.getDoctorImage()  %>" alt="<%= doctor.getFirstName()+""+doctor.getLastName() %>">
         </a>
         <h3><%= doctor.getFirstName()+""+doctor.getLastName()  %></h3>
         <span><%= doctor.getDepartment() %></span>
+        <div>
+        <a href = "<%=request.getContextPath()%>/appointment/booknew?id=<%=doctor.getId()%>" >book appointment</a>
+        </div>
+        
     </div>
 <%
 }
@@ -69,9 +73,9 @@
     </section>
 
     <section class="footer">
-        <div class="box-container" id="box-container"></div>
+		<jsp:include page="footer.jsp"></jsp:include>
 
-    </section>
+	</section>
 
 
 </body>

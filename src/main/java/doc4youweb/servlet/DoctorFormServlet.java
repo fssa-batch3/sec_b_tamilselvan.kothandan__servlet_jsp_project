@@ -14,24 +14,13 @@ import in.fssa.doc4you.model.Doctor;
 import in.fssa.doc4you.service.DoctorService;
 import in.fssa.doc4you.util.EmailGenerator;
 
-/**
- * Servlet implementation class DoctorFormServlet
- */
+
 @WebServlet("/DoctorFormServlet")
 public class DoctorFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DoctorFormServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -53,7 +42,7 @@ ddto.setLastName(lastName);
 ddto.setEmailId(email);
 ddto.setPassword(password);
 ddto.setQualifications(qualifications);
-ddto.setExperience(10);
+ddto.setExperience(parseInt(experience));
 ddto.setDepartment(department);
 ddto.setDoctorImage(doctorImage);
 
@@ -70,6 +59,11 @@ ddto.setDoctorImage(doctorImage);
 
 
 	 
+	private double parseInt(String experience) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

@@ -1,62 +1,83 @@
 package doc4youweb.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import in.fssa.doc4you.exception.ValidationException;
 import in.fssa.doc4you.model.User;
+import in.fssa.doc4you.service.UserService;
 
 /**
  * Servlet implementation class CreateUSerServlet
  */
-@WebServlet("/create_user")
+@WebServlet("/create")
 public class CreateUSerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		User user = new User();
 
-		String firstName = request.getParameter("firstname");
-		String lastName = request.getParameter("lastname");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		try {
 
-		if (firstName == null || firstName.trim().isEmpty()) {
-		   System.out.println("first name is required");;
-		} else {
-		    user.setFirstName(firstName);
+			String firstName = request.getParameter("first_name");
+
+			if (firstName == null) {
+				System.out.println("first_name cannot be null or empty");
+			} else if (firstName.isEmpty()) {
+				System.out.println("first_name cannot be empty");
+			} else {
+				user.setFirstName(firstName);
+			}
+String lastname = request.getParameter("last_name");
+
+if (lastname == null) {
+	System.out.println("last_name cannot be null or empty");
+} else if (lastname.isEmpty()) {
+	System.out.println("last_name cannot be empty");
+} else {
+	user.setLastName(lastname);
+}
+
+String email = request.getParameter("email");
+
+if (email == null) {
+	System.out.println("email cannot be null or empty");
+} else if (email.isEmpty()) {
+	System.out.println("email cannot be empty");
+} else {
+	user.setEmail(email);
+}
+
+String password = request.getParameter("password");
+
+if (password == null) {
+	System.out.println("password cannot be null or empty");
+} else if (password.isEmpty()) {
+	System.out.println("password cannot be empty");
+} else {
+	user.setPassword(password);
+}
+			
+
+			System.out.println(user.toString());
+
+			UserService userService = new UserService();
+			userService.createUser(user);
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+		} catch (ValidationException e) {
+			e.printStackTrace();
 		}
-
-		if (lastName == null || lastName.trim().isEmpty()) {
-			System.out.println("Last name is required.");
-		} else {
-		    user.setLastName(lastName);
-		}
-
-		if (email == null || email.trim().isEmpty()) {
-			System.out.println("Email is required."); 
-		} else {
-		    user.setEmail(email);
-		}
-
-		    if (password.length() < 8) {
-		    	System.out.println("Password must be at least 8 characters long.");
-		    } else {
-		       
-		        user.setPassword(password);
-		    }
-
-		
-		    
-		    response.sendRedirect(request.getContextPath()+"/list.jsp");
 	}
 
 }

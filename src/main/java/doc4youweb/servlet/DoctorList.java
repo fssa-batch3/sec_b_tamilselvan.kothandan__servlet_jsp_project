@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.protobuf.ServiceException;
 
 import in.fssa.doc4you.dto.DoctorDTO;
+import in.fssa.doc4you.exception.ValidationException;
 import in.fssa.doc4you.service.DoctorService;
 
 /**
@@ -30,24 +32,17 @@ public class DoctorList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Create a Doctor object with sample data
-      DoctorService doctorService = new DoctorService();
-      Set<DoctorDTO> doctors;
-	try {
-		doctors = doctorService.findAllByDoctors();
-		Gson gson = new Gson();
-        String json = gson.toJson(doctors);
-       response.setContentType("application/json");        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-	} catch (ServiceException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		PrintWriter out = response.getWriter();
-		out.println(e.getMessage());
+    	DoctorService doctorService = new DoctorService();
+		try {
+			Set<DoctorDTO> doctors = doctorService.listAllDoctor();
+			request.setAttribute("Doctors", doctors);
+			RequestDispatcher rd = request.getRequestDispatcher("/list_doctor.jsp");
+			rd.forward(request, response);
+		} catch (ValidationException e) {
+			e.printStackTrace();
+			throw new RuntimeException("no doctors exists");
+		} 
 	}
-
-       }
-
 
 
 
