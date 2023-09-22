@@ -15,15 +15,7 @@
       <jsp:include page = "header.jsp"></jsp:include>
 
 
-<script>
-        // Check if the errorMessage attribute is set
-        var errorMessage = '<%= request.getAttribute("errorMessage") %>';
-        if (errorMessage && errorMessage.length > 0) {
-            // Display an alert with the error message
-            alert(errorMessage);
-        }
-    </script>
-        <!-- header section ends -->
+
 
         <div class="signin">
             <div class="container">
@@ -50,7 +42,7 @@
 
                         <button type="submit">Submit</button>
                         <p>
-                            <a href="./sign in.html">Not a Member</a>
+                            <a href="./sign_in.jsp">Not a Member</a>
                         </p>
                         <closeform></closeform>
                     </form>
@@ -58,7 +50,15 @@
             </div>
         </div>
 
-       >
+       <% if (request.getAttribute("loginSuccess") != null && (boolean) request.getAttribute("loginSuccess")) { %>
+    <script>
+        alert("Login successful!");
+    </script>
+    <% } else if (request.getAttribute("errorMessage") != null) { %>
+    <script>
+        alert("<%= request.getAttribute("errorMessage") %>");
+    </script>
+    <% } %>
     </body>
 
 </html>

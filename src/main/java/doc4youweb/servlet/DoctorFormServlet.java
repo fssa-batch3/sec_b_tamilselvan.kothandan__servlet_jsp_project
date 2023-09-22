@@ -24,8 +24,7 @@ public class DoctorFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		Doctor doctor = new Doctor();
-String firstName = request.getParameter("first_name");
+		String firstName = request.getParameter("first_name");
 String lastName = request.getParameter("last_name");
 String department = request.getParameter("department");
 String doctorImage = request.getParameter("doctor_image");

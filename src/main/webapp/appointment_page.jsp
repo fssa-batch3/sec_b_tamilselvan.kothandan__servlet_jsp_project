@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@page import="in.fssa.doc4you.model.User"%>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +9,15 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+	crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
 
 </head>
 
@@ -50,7 +57,7 @@
 					placeholder="End_time" class="box" name = "end time">
 					  <input type ="hidden" name = "doctor_id" value = "<%=request.getParameter("id")%>">
 				<button class="btn" id="book_now" type="submit">Book Now</button>
-				</a>
+				
 
 			</form>
 

@@ -12,7 +12,7 @@ import in.fssa.doc4you.exception.ValidationException;
 import in.fssa.doc4you.service.DoctorService;
 
 
-@WebServlet("/doctors/create")
+@WebServlet("/doctor_create")
 public class DoctorRegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DoctorService doctorService = new DoctorService();
@@ -30,7 +30,7 @@ public class DoctorRegistrationServlet extends HttpServlet {
 			doctorService.createDoctor(doctor);
 			String alert = "<script>alert('Doctor created successfully');</script>";
 			response.getWriter().println(alert);
-			response.sendRedirect(request.getContextPath()+"/index.jsp");
+			response.sendRedirect(request.getContextPath()+"/doctor_singup.jsp");
 		} catch (ValidationException e) {
 			String alert = "<script>alert('" + e.getMessage() +"');</script>";
 			response.getWriter().println(alert);

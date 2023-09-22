@@ -35,7 +35,7 @@
                             pattern="[a-zA-Z0-9]+"
                             placeholder="abc@exampl.com"
                         >
-                        <label>First name:</label>
+                        <label>Last name:</label>
                         <input
                             type="text"
                             name = "last_name"
@@ -62,19 +62,7 @@
                             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             id="password"
                         >
-                        <input type="checkbox" id="isDoctor" name="isDoctor">
-        <label for="isDoctor">Register as a Doctor</label><br>
-        <div id="doctorFields" style="display: none;">
-            <label for="qualifications">Qualifications:</label>
-            <input type="text" id="qualifications" name="qualifications"><br>
-            <label for="experience">Experience:</label>
-            <input type="text" id="experience" name="experience"><br>
-            <label for="department">Department:</label>
-            <input type="text" id="Department" name="department"><br>
-            <label for="doctorimg">Doctor-Image:</label>
-            <input type="text" id="doctorimg" name="doctorimg"><br>
-            <!-- Add more doctor-specific fields as needed -->
-        </div>
+                        
         <input type="submit" value="Register">
                         <p>
                             <a href="../products/login.html">Already a member</a>

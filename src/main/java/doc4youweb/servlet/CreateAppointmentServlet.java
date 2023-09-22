@@ -12,9 +12,7 @@ import in.fssa.doc4you.model.Appointment;
 import in.fssa.doc4you.model.User;
 import in.fssa.doc4you.service.AppointmentService;
 
-/**
- * Servlet implementation class CreateAppointmentServlet
- */
+
 @WebServlet("/appointment/create")
 public class CreateAppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +43,7 @@ public class CreateAppointmentServlet extends HttpServlet {
 		try {
 			appointmentService.create(appointment);
 			response.getWriter().println("<script>alert('Appointment booked successfully!');</script>");
-			response.sendRedirect(request.getContextPath()+"/appointment");
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		} catch (ValidationException e) {
 			e.printStackTrace();
 			response.getWriter().print("<script>alert('"+e.getMessage()+"');</script>");

@@ -11,31 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.fssa.doc4you.model.User;
 
-/**
- * Servlet implementation class AppointmentFormServlet
- */
+
 @WebServlet("/appointment/booknew")
 public class AppointmentFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AppointmentFormServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User)request.getSession(false).getAttribute("loggedUser");
 		System.out.println(user);
 		String doctorId = request.getParameter("id");
+		System.out.println("befor if "+doctorId);
 		
 		if(user!=null) {
 			int doctor_id = Integer.parseInt(doctorId);
+			System.out.println("After if parse"+doctor_id);
 			request.setAttribute("doctor id", doctor_id);
 			request.setAttribute("loggedUser", user);
 			RequestDispatcher rd = request.getRequestDispatcher("/appointment_page.jsp");
@@ -47,9 +37,7 @@ public class AppointmentFormServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

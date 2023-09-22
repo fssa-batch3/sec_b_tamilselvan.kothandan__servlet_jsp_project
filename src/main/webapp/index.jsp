@@ -35,7 +35,7 @@
 	<section class="home" id="home">
 
 		<div class="image">
-			<img src="./assets/img/Doctors-bro.svg" alt="">
+			<img src="<%=request.getContextPath() %>/assets/img/Doctors-bro.svg" alt="">
 		</div>
 
 		<div class="content">

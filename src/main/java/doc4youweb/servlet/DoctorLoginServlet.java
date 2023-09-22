@@ -24,14 +24,14 @@ import in.fssa.doc4you.service.UserService;
 /**
  * Servlet implementation class DoctorLoginServlet
  */
-@WebServlet("/homepage/doctorlogin")
+@WebServlet("/doctorlogin")
 public class DoctorLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private DoctorService doctorService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher rd = request.getRequestDispatcher("/login_for_doctor.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/doctor_dashboard.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -53,24 +53,24 @@ public class DoctorLoginServlet extends HttpServlet {
 		
 		HttpSession doctorLogin = request.getSession();
 		if(password.equals(doctor.getPassword())) {
-			doctorLogin.setAttribute("logged email", email);
-//			application.setAttribute("logged email" , email);
+			doctorLogin.setAttribute("logged_email", email);
 			System.out.println(email);
-			doctorLogin.setAttribute("logged doctor", doctor);
+			doctorLogin.setAttribute("logged_doctor", doctor);
 			System.out.println(doctor);
-			doctorLogin.setAttribute("logged doctor's user id", doctor.getId());
+			doctorLogin.setAttribute("logged_doctor_user_id", doctor.getId());
 			System.out.println(doctor.getId());
-			doctorLogin.setAttribute("logged doctor's doctor id", doctor.getId());
-			System.out.println(doctor.getId());
+			doctorLogin.setAttribute("logged_doctor_doctor_id", doctor.getDoctorId());
+			System.out.println(doctor.getDoctorId());
 			
 			
 			response.getWriter().println("<script>alert('Doctor logged in successfully!');");
-			response.getWriter().println("window.location.href=\""+request.getContextPath()+"/home\"");
+			String pageName = request.getContextPath() + "/DoctorAppointmentServlet";
+			response.sendRedirect(pageName);
+
 			response.getWriter().println("</script>");
-//			response.sendRedirect(request.getContextPath()+"/homepage");
 		}else {
 			response.getWriter().println("<script>alert('Incorrect password!');");
-			response.getWriter().println("window.location.href=\""+request.getContextPath()+"/homepage/doctorlogin\"");
+			response.getWriter().println("window.location.href=\""+request.getContextPath()+"/Doctor_signup.jsp");
 			response.getWriter().println("</script>");
 		}
 		

@@ -247,7 +247,7 @@
   .doctors .box-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-      gap: 2rem;
+      gap: 5rem;
   }
 
   .doctors .box-container .Box {
@@ -257,7 +257,7 @@
       border: var(--border);
       box-shadow: var(--box-shadow);
       padding: 2rem;
-      width: min-content;
+     width: min-content;
       height: auto ;
   }
 
@@ -2063,4 +2063,7 @@ input[type="checkbox"] {
   .password-toggle i:hover {
     color: var(--green); /* Icon color on hover */
   }
+  #edit_profile{
+	  margin:160px auto;  
+	  }
   

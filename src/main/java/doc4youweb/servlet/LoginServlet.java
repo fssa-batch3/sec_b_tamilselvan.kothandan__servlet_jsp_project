@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 	private UserService userService;
 
 	public LoginServlet() {
-		// Initialize your UserService here
 		userService = new UserService();
 	}
 

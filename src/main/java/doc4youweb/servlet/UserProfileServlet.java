@@ -38,12 +38,11 @@ public class UserProfileServlet extends HttpServlet {
 		try {
 			user1 = UserService.getByUserEmail(user.getEmail());
 		} catch (ValidationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         // Set the user object as an attribute to pass to the JSP
         request.setAttribute("userProfile", user1);
-
+    	System.out.println("hello world");
         // Forward the request to the viewProfile.jsp page
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
 	}

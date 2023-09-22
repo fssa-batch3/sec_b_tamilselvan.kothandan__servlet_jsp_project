@@ -54,7 +54,7 @@ public class CancelAppointmentServlet extends HttpServlet {
 	            app.setId(appointmentId);
 	            app.setStatus(appointment.getStatus());
 	            
-	            if (app != null && app.getStatus().equals(Status.On_process)) {
+	            if (app != null && app.getStatus().equals(Status.On_process)|| app.getStatus().equals(Status.Approved)) {
 	                app.setStatus(Status.Cancelled);
 	                
 	                appointmentDAO.updateAppointmentStatus(app.getId(), app);

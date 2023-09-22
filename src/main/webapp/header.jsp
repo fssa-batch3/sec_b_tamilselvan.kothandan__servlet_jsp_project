@@ -7,13 +7,12 @@ boolean isLogin_in = user != null;
 <%
 if (isLogin_in == false) {
 %>
-	<a href="index.jso" class="logo"> <img src="./assets/img/image.png" alt="logo"
+	<a href="index.jso" class="logo"> <img src="<%=request.getContextPath() %>/assets/img/image.png" alt="logo"
 		id="logo_image">
 	</a>
 	<nav class="navbar">
 		<a href="index.jsp">Home</a>  <a
-			href="About_page.jsp">About</a> <a href="login.jsp">Login</a> <a
-			href="admin_login.jsp">Admin</a> <a href="doctor_registration.jsp">Doctor Registration</a>
+			href="About_page.jsp">About</a> <a href="login.jsp">Login</a>  <a href="doctor_registration.jsp">Doctor Registration</a>
 	</nav>
 	<div id="menu-btn" class="fas fa-bars"></div>
 
@@ -21,7 +20,7 @@ if (isLogin_in == false) {
 } else {
 %>
 
-	<a href="index.jsp" class="logo"> <img src="assets/img/image.png" alt="logo"
+	<a href="index.jsp" class="logo"> <img src="<%=request.getContextPath() %>/assets/img/image.png"" alt="logo"
 		id="logo_image">
 	</a>
 	
