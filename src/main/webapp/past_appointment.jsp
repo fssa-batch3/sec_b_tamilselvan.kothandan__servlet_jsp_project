@@ -56,9 +56,9 @@
                         <td>${appointment.status}</td>
                         <td>
       
-                <form action="AcceptAppointment" method="post">
+                <form action="cancelAppointment" method="post">
                     <input type="hidden" name="appointmentId" value="${appointment.id}">
-                    <input type="submit" value="Cancelled" ${appointment.status == 'Cancelled' ? 'disabled' : ''}>
+                    <input type="submit" value="Cancel" >
                 </form>
                 
             </td>
@@ -73,7 +73,7 @@
 
             <!-- Add a link to navigate back to the main page or any other relevant pages -->
             <p>
-                <a href="index.jsp">Back to Main Page</a>
+                <a href="index">Back to Main Page</a>
             </p>
         </div>
     </section>

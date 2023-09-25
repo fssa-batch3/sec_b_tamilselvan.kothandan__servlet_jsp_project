@@ -58,6 +58,9 @@
 	<div>
 		<!-- Edit Profile Button -->
 <button class = "btn-1" id="editProfileBtn" onclick="editProfile(<%= user.getId() %>)" type = "sumbit">Edit Profile</button>
+<form action="DeleteAccountServlet" method="post">
+    <input type="submit" name="deleteAccount" value="Delete My Account">
+</form>
 
 <!-- Delete Profile Button -->
 <!-- <button  class = "btn-1"id="deleteProfileBtn" onclick="deleteProfile(<%= user.getId() %>)" type = "sumbit">Delete Profile</button> -->

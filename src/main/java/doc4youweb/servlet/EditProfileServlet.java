@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,14 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import in.fssa.doc4you.dao.UserDAO;
 import in.fssa.doc4you.model.User;
 
-/**
- * Servlet implementation class EditProfileServlet
- */
+
 @WebServlet("/profile/edit")
 public class EditProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doPost(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("edit_profile.jsp");
+		dispatcher.forward(request, response);
+
+//		doPost(request, response);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -47,17 +49,18 @@ public class EditProfileServlet extends HttpServlet {
 			UserDAO userDAO = new UserDAO();
 
 			updatedUser = userDAO.updateUsers(userId, us);
-
-			response.sendRedirect(request.getContextPath() + "/profile");
+	        response.getWriter().print("<script>alert('profile updated successfully !');");
+				response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/profile\"");
+				response.getWriter().print("</script>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
-			alertMessage = "An error occurred. Profile update failed. Please try again.";
+	        response.getWriter().print("<script>alert('An error occurred. Profile update failed. Please try again.");
+				response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/profile\"");
+				response.getWriter().print("</script>");
 		}
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<html><head><script>alert('" + alertMessage + "');</script></head><body></body></html>");
+		
 	}
 
 }

@@ -25,7 +25,19 @@
 
 <body>
 
-    <jsp:include page="header.jsp"></jsp:include>
+   <header class="header" id="header"></header>
+	<header class="header">
+		<a href="index" class="logo"> <img
+			src="./assets/img/image.png" alt="logo" id="logo_image">
+		</a>
+
+		<nav class="navbar">
+			<a href="doctorLogout">logout</a>
+
+		</nav>
+		<div id="menu-btn" class="fas fa-bars"></div>
+
+	</header>
 
 
     <section class="home-1">
@@ -62,7 +74,7 @@
                             <input type="submit" value="Approve" disabled>
                         </c:when>
                         <c:otherwise>
-                            <input type="submit" value = "${appointment.status}">
+                            <input type="submit" value = "Approve">
                         </c:otherwise>
                     </c:choose>
                 </form>
@@ -73,7 +85,7 @@
                             <input type="submit" value="Reject" disabled>
                         </c:when>
                         <c:otherwise>
-                            <input type="submit" value="${appointment.status}">
+                            <input type="submit" value="Reject">
                         </c:otherwise>
                     </c:choose>
                 </form>

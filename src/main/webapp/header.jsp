@@ -11,8 +11,8 @@ if (isLogin_in == false) {
 		id="logo_image">
 	</a>
 	<nav class="navbar">
-		<a href="index.jsp">Home</a>  <a
-			href="About_page.jsp">About</a> <a href="login.jsp">Login</a>  <a href="doctor_registration.jsp">Doctor Registration</a>
+		<a href="index">Home</a>  <a
+			href="about">About</a> <a href="login">Login</a>  <a href="doctor_create">Doctor Registration</a>
 	</nav>
 	<div id="menu-btn" class="fas fa-bars"></div>
 
@@ -25,8 +25,8 @@ if (isLogin_in == false) {
 	</a>
 	
 	<nav class="navbar" id="navbar">
-		<a href="index.jsp">Home</a> <a href="About_page.jsp">About</a> <a
-			href="Doctors.jsp">Doctors</a> 
+		<a href="index">Home</a> <a href="about">About</a> <a
+			href="doctor">Doctors</a> 
 		<div class="dropdown">
 			<button class="dropbtn" id="dropdtn" style='margin-left: 2rem;'>
 				<i class='fa-solid fa-circle-user'

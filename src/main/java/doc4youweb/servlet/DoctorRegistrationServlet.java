@@ -1,6 +1,8 @@
 package doc4youweb.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,13 @@ import in.fssa.doc4you.service.DoctorService;
 
 @WebServlet("/doctor_create")
 public class DoctorRegistrationServlet extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("doctor_registration.jsp");
+		dispatcher.forward(request, response);
+
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DoctorService doctorService = new DoctorService();
 		DoctorDTO doctor = new DoctorDTO();
@@ -27,15 +36,15 @@ public class DoctorRegistrationServlet extends HttpServlet {
 		doctor.setDoctorImage(request.getParameter("doctor image"));
 		
 		try {
-			doctorService.createDoctor(doctor);
-			String alert = "<script>alert('Doctor created successfully');</script>";
-			response.getWriter().println(alert);
-			response.sendRedirect(request.getContextPath()+"/doctor_singup.jsp");
-		} catch (ValidationException e) {
-			String alert = "<script>alert('" + e.getMessage() +"');</script>";
-			response.getWriter().println(alert);
-			e.printStackTrace();
-		}
+	        doctorService.createDoctor(doctor);
+	        response.getWriter().print("<script>alert('Doctor registered sucessfully  !');");
+			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctorlogin\"");
+			response.getWriter().print("</script>");;
+	    } catch (ValidationException e) {
+	        response.getWriter().print("<script>alert('" + e.getMessage() + "');");
+	        response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctor_create\";");
+	        response.getWriter().print("</script>");
+	    }
 		
 		
 		

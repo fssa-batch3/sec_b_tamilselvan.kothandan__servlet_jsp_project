@@ -31,7 +31,7 @@ public class DoctorLoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher rd = request.getRequestDispatcher("/doctor_dashboard.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/Doctor_signup.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -39,40 +39,39 @@ public class DoctorLoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		DoctorService doctorService = new DoctorService();
-		DoctorDTO doctor;
-		
-		try {
-			doctor = doctorService.getDoctorByEmail(email);
-		}catch(ValidationException e) {
-			throw new RuntimeException("no user exists");
-		}
-		
-		HttpSession doctorLogin = request.getSession();
-		if(password.equals(doctor.getPassword())) {
-			doctorLogin.setAttribute("logged_email", email);
-			System.out.println(email);
-			doctorLogin.setAttribute("logged_doctor", doctor);
-			System.out.println(doctor);
-			doctorLogin.setAttribute("logged_doctor_user_id", doctor.getId());
-			System.out.println(doctor.getId());
-			doctorLogin.setAttribute("logged_doctor_doctor_id", doctor.getDoctorId());
-			System.out.println(doctor.getDoctorId());
-			
-			
-			response.getWriter().println("<script>alert('Doctor logged in successfully!');");
-			String pageName = request.getContextPath() + "/DoctorAppointmentServlet";
-			response.sendRedirect(pageName);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        DoctorService doctorService = new DoctorService();
+        DoctorDTO doctor;
 
-			response.getWriter().println("</script>");
-		}else {
-			response.getWriter().println("<script>alert('Incorrect password!');");
-			response.getWriter().println("window.location.href=\""+request.getContextPath()+"/Doctor_signup.jsp");
-			response.getWriter().println("</script>");
-		}
-		
+        try {
+            doctor = doctorService.getDoctorByEmail(email);
+        } catch (ValidationException e) {
+            // Set error message in session
+            request.getSession().setAttribute("errorMessage", "No user exists");
+            response.sendRedirect(request.getContextPath() + "/Doctor_signup.jsp");
+            return;
+        }
+
+        HttpSession doctorLogin = request.getSession();
+        if (password.equals(doctor.getPassword())) {
+            doctorLogin.setAttribute("logged_email", email);
+            doctorLogin.setAttribute("logged_doctor", doctor);
+            doctorLogin.setAttribute("logged_doctor_user_id", doctor.getId());
+            doctorLogin.setAttribute("logged_doctor_doctor_id", doctor.getDoctorId());
+
+            response.getWriter().print("<script>alert('Doctor logged in  Successfully !');");
+			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctor_appointment\"");
+			response.getWriter().print("</script>");;
+        } else {
+            // Set error message in session
+        	response.getWriter().print("<script>alert('Incorrect password');");
+			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctorlogin\"");
+			response.getWriter().print("</script>");
+        }
+    }
+
 	}
-}
+

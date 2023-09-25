@@ -1,7 +1,9 @@
 package doc4youweb.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +20,18 @@ import in.fssa.doc4you.service.UserService;
 @WebServlet("/create")
 public class CreateUSerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	RequestDispatcher dispatcher = request.getRequestDispatcher("sign_up.jsp");
+	dispatcher.forward(request, response);
 
+}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = new User();
+		
 
 		try {
+			boolean validationError = false;
 
 			String firstName = request.getParameter("first_name");
 
@@ -67,12 +75,23 @@ if (password == null) {
 
 			System.out.println(user.toString());
 
-			UserService userService = new UserService();
-			userService.createUser(user);
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
-		} catch (ValidationException e) {
-			e.printStackTrace();
-		}
-	}
 
+			try {
+
+				UserService userService = new UserService();
+				userService.createUser(user);
+				response.getWriter().print("<script>alert('User registered successfully !');");
+				response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/login\"");
+				response.getWriter().print("</script>");
+			} catch (ValidationException e) {
+				PrintWriter out = response.getWriter();
+				String jsCode = "<script>alert('" + e.getMessage() + "');</script>";
+				out.println(jsCode);
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+}
 }

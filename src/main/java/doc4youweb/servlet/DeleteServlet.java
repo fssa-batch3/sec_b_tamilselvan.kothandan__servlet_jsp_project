@@ -36,7 +36,7 @@ public class DeleteServlet extends HttpServlet {
 
 		try {
 			userService.deleteUser(id);
-			response.sendRedirect(request.getContextPath() + "index.jsp");
+			response.sendRedirect(request.getContextPath() + "index");
 		} catch (ValidationException e) {
 			e.printStackTrace();
     }

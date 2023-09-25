@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
+        <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +17,15 @@
     </head>
 
     <body>
+    
+    <c:if test="${not empty successMessage}">
+        <div class="success-message">${successMessage}</div>
+    </c:if>
+
+    <!-- Display error message if it exists -->
+    <c:if test="${not empty errorMessage}">
+        <div class="error-message">${errorMessage}</div>
+    </c:if>
       <jsp:include page = "header.jsp"></jsp:include>
 
 
@@ -23,7 +37,7 @@
                     <img src="./assets/img/Sign up-bro.png" alt="sign_up image">
                 </div>
                 <div class="login">
-                    <form method="post" role="form" id="signIn" action = "LoginServlet">
+                    <form method="post" role="form" id="signIn" action = "login">
                         <h1>Login</h1>
                         <hr>
                         <p>Explore the Medical Service!</p>
@@ -59,6 +73,39 @@
         alert("<%= request.getAttribute("errorMessage") %>");
     </script>
     <% } %>
+    <script type="text/javascript">
+    const passwordToggle = document.getElementById("passwordToggle");
+const toggleIcon = document.getElementById("toggleIcon");
+passwordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    toggleIcon.classList.remove("fa-eye");
+    toggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    toggleIcon.classList.remove("fa-eye-slash");
+    toggleIcon.classList.add("fa-eye");
+  }
+});
+
+const PasswordToggle = document.getElementById("PasswordToggle");
+const ToggleIcon = document.getElementById("ToggleIcon");
+PasswordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("confirm_password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    ToggleIcon.classList.remove("fa-eye");
+    ToggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    ToggleIcon.classList.remove("fa-eye-slash");
+    ToggleIcon.classList.add("fa-eye");
+  }
+});
+</script>
     </body>
 
 </html>

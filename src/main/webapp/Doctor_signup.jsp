@@ -15,6 +15,9 @@
     </head>
 
     <body>
+    
+   
+    
       <jsp:include page = "header.jsp"></jsp:include>
 
 <div class="signin">
@@ -42,11 +45,44 @@
 
                         <button type="submit">Submit</button>
                         <p>
-                            <a href="./sign_in.jsp">Not a Member</a>
+                            <a href="doctor_create">Not a Member</a>
                         </p>
 </form>
 </div>
 </div>
 </div>
+<script type="text/javascript">
+const passwordToggle = document.getElementById("passwordToggle");
+const toggleIcon = document.getElementById("toggleIcon");
+passwordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    toggleIcon.classList.remove("fa-eye");
+    toggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    toggleIcon.classList.remove("fa-eye-slash");
+    toggleIcon.classList.add("fa-eye");
+  }
+});
+
+const PasswordToggle = document.getElementById("PasswordToggle");
+const ToggleIcon = document.getElementById("ToggleIcon");
+PasswordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("confirm_password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    ToggleIcon.classList.remove("fa-eye");
+    ToggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    ToggleIcon.classList.remove("fa-eye-slash");
+    ToggleIcon.classList.add("fa-eye");
+  }
+});
+</script>
 </body>
 </html>

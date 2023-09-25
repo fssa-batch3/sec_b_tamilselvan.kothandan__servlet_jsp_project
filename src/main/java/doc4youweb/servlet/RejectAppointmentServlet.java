@@ -54,12 +54,12 @@ public class RejectAppointmentServlet extends HttpServlet {
 			            Appointment app = new Appointment();
 			            app.setId(appointmentId);
 			            app.setStatus(appointment.getStatus());
-			            if (app != null && app.getStatus().equals(Status.On_process)) {
+			            if (app != null && app.getStatus().equals(Status.On_process)|| app.getStatus().equals(Status.Approved)) {
 			                app.setStatus(Status.Rejected);
 			                
 			                appointmentDAO.updateAppointmentStatus(app.getId(), app);
 
-			                response.sendRedirect(request.getContextPath() + "/DoctorAppointment.jsp");
+			                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
 			            } else if (app != null && app.getStatus().equals(Status.Cancelled)) {
 			                String errorMessage = "Appointment is already Cancelled and cannot be Rejected.";
 			                request.setAttribute("errorMessage", errorMessage);

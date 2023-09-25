@@ -53,19 +53,19 @@ public class CancelAppointmentServlet extends HttpServlet {
 	            Appointment app = new Appointment();
 	            app.setId(appointmentId);
 	            app.setStatus(appointment.getStatus());
-	            
-	            if (app != null && app.getStatus().equals(Status.On_process)|| app.getStatus().equals(Status.Approved)) {
+	            if (app != null && (app.getStatus() == Status.On_process || app.getStatus() == Status.Approved)) {
 	                app.setStatus(Status.Cancelled);
-	                
 	                appointmentDAO.updateAppointmentStatus(app.getId(), app);
 
 	                response.sendRedirect(request.getContextPath() + "/appointment");
 	            } else {
-	            	String errorMessage = "Appointment is not valid or has already been cancelled.";
+	                String errorMessage = "Appointment is not valid or has already been cancelled.";
 	                request.setAttribute("errorMessage", errorMessage);
 	                response.getWriter().println("<script>alert('" + errorMessage + "');</script>");
+	                response.sendRedirect(request.getContextPath() + "/appointment");
 	            }
-	         
+
+
 	        }catch (Exception e) {
 	            
 	            e.printStackTrace();   }

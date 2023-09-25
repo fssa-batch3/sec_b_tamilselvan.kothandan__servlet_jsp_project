@@ -60,17 +60,17 @@ public class AcceptAppointmentServlet extends HttpServlet {
 	                
 	                appointmentDAO.updateAppointmentStatus(app.getId(), app);
 
-	                response.sendRedirect(request.getContextPath() + "/DoctorAppointmentServlet");
+	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
 	            }else if (app != null && app.getStatus().equals(Status.Cancelled)) {
-	                String errorMessage = "Appointment is already Cancelled and cannot be Rejected.";
+	                String errorMessage = "Appointment is already Cancelled and cannot be Rejected or Approve.";
 	                request.setAttribute("errorMessage", errorMessage);
 	                response.getWriter().println("<script>alert('" + errorMessage + "');</script>");
-	                response.sendRedirect(request.getContextPath() + "/DoctorAppointmentServlet");
+	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
 	            }else {
 	            	String errorMessage = "Appointment is not valid or has already been Approved.";
 	                request.setAttribute("errorMessage", errorMessage);
 	                response.getWriter().println("<script>alert('" + errorMessage + "');</script>");
-	                response.sendRedirect(request.getContextPath() + "/DoctorAppointmentServlet");
+	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
 	            }
 	         
 	        }catch (Exception e) {

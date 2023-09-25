@@ -58,7 +58,7 @@
 
         </section>
 
-        <div class="box-container" id="doctor-list">
+        <div class="box-container" id="doctor-list" style = "gap:5rem;">
 <%for ( DoctorDTO doctor:doctors) {
     
 %>
@@ -71,10 +71,13 @@
         <div>
 <a href="<%= request.getContextPath() %>/appointment/booknew?id=<%= doctor.getId() %>"
    style="display: inline-block;
-          padding: 10px 20px;
+   margin-top:.5rem;
+          padding: 5px 15px;
           background-color: white;
+          border:1.5px solid #0e6453 ;
           border-color:#0e6453;
-          
+          color:#0e6453;
+          font-size:10px;
           text-decoration: none;
           border-radius: 5px;">
     Book Appointment
@@ -95,35 +98,29 @@
 <script type="text/javascript">
 
 function search() {
-	  // Get the value of the search box and convert it to lowercase
-	  const searchbox = searchBox.value.toLowerCase();
+	  const searchBox = document.getElementById("search-item");
+	  const searchText = searchBox.value.toLowerCase();
 
-	  // Find all elements with class 'Box'
-	  const box = document.querySelectorAll(".Box");
+	  const boxes = document.querySelectorAll(".Box");
 
-	  // Loop through each 'Box' element
-	  for (let i = 0; i < box.length; i++) {
-	    // Find the first <h3> element inside the current 'Box' element
-	    const match = box[i].getElementsByTagName("h3")[0];
+	  boxes.forEach(box => {
+	    const h3Element = box.querySelector("h3");
+	    const spanElement = box.querySelector("span");
 
-	    if (match) {
-	      // Get the text content of the <h3> element and convert it to lowercase
-	      const textvalue = match.textContent || match.innerHTML;
-	      const lowercaseTextValue = textvalue.toLowerCase();
+	    const h3Text = h3Element ? h3Element.textContent.toLowerCase() : "";
+	    const spanText = spanElement ? spanElement.textContent.toLowerCase() : "";
 
-	      // Show the 'Box' element if the search text matches the <h3> text
-	      if (lowercaseTextValue.indexOf(searchbox) > -1) {
-	        box[i].style.display = "";
-	      } else {
-	        box[i].style.display = "none";
-	      }
+	    if (h3Text.includes(searchText) || spanText.includes(searchText)) {
+	      box.style.display = "";
+	    } else {
+	      box.style.display = "none";
 	    }
-	  }
+	  });
 	}
 
-	// Get the search box element and add an event listener for when the user types
 	const searchBox = document.getElementById("search-item");
 	searchBox.addEventListener("keyup", search);
+
 
 </script>
 

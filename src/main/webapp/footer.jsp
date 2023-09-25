@@ -11,13 +11,13 @@ if (isLogin_in == false) {
 %>
 	<div class="box">
     <h3>Quick links</h3>
-    <a href="<%=request.getContextPath()%>/index.jsp">
+    <a href="<%=request.getContextPath()%>/index">
         <i class="fas fa-chevron-right"></i> Home 
     </a>
-    <a href="#services">
+    <a href="<%=request.getContextPath()%>/index">
         <i class="fas fa-chevron-right"></i> Services 
     </a>
-    <a href="<%=request.getContextPath()%>/About_page.jsp">
+    <a href="<%=request.getContextPath()%>/about">
         <i class="fas fa-chevron-right"></i> About 
     </a>
 </div>
@@ -37,16 +37,14 @@ if (isLogin_in == false) {
 
 <div class="box">
     <h3>follow us</h3>
-    <a href="#">
+    <a href="https://www.facebook.com/rohitselvan?mibextid=ZbWKwL">
         <i class="fab fa-facebook-f"></i> facebook 
     </a>
-    <a href="#">
-        <i class="fab fa-twitter"></i> twitter 
-    </a>
-    <a href="#">
+    
+    <a href="https://instagram.com/_tamilsoul?igshid=OGQ5ZDc2ODk2ZA==">
         <i class="fab fa-instagram"></i> instagram 
     </a>
-    <a href="#">
+    <a href="https://www.linkedin.com/in/tamilselvan-kothandan-bb3262252/">
         <i class="fab fa-linkedin"></i> linkedin 
     </a>
 </div>
@@ -62,18 +60,16 @@ if (isLogin_in == false) {
 
 	<div class="box">
     <h3>Quick links</h3>
-    <a href="${Home}">
+    <a href="<%= request.getContextPath()%>/index">
         <i class="fas fa-chevron-right"></i> Home 
     </a>
-    <a href="${About}">
+    <a href="<%= request.getContextPath()%>/about">
         <i class="fas fa-chevron-right"></i> About 
     </a>
-    <a href="${Doctor}">
+    <a href="<%= request.getContextPath()%>/doctor">
         <i class="fas fa-chevron-right"></i> Doctors 
     </a>
-    <a href="${Hospital}">
-        <i class="fas fa-chevron-right"></i> Hospital 
-    </a>
+    
 </div>
 
 <div class="box">
@@ -91,16 +87,14 @@ if (isLogin_in == false) {
 
 <div class="box">
     <h3>follow us</h3>
-    <a href="#">
+    <a href="https://www.facebook.com/rohitselvan?mibextid=ZbWKwL">
         <i class="fab fa-facebook-f"></i> facebook 
     </a>
-    <a href="#">
-        <i class="fab fa-twitter"></i> twitter 
-    </a>
-    <a href="#">
+
+    <a href="#https://instagram.com/_tamilsoul?igshid=OGQ5ZDc2ODk2ZA==">
         <i class="fab fa-instagram"></i> instagram 
     </a>
-    <a href="#">
+    <a href="https://www.linkedin.com/in/tamilselvan-kothandan-bb3262252/">
         <i class="fab fa-linkedin"></i> linkedin 
     </a>
 </div>

@@ -23,6 +23,14 @@
 
 <body>
 
+
+
+
+
+
+
+
+
 	<jsp:include page="header.jsp"></jsp:include>
 
 <%System.out.println("doctor id : "+request.getAttribute("doctor id")); %>
@@ -48,13 +56,13 @@
 					id="first_name" value="<%= user.getFirstName()%>"> 
 					<input type="text" placeholder="last_name" class="box" id="last_name" value="<%=user.getLastName()%>"> 
 					<input type="text"
-					placeholder="Reason for consulation" class="box" name = "health issues">
-				<input type="date" placeholder="date of consulation" class="box"
-					id="number" name = "date of consultation"> 
+					placeholder="Reason for consulation" class="box" name = "health_issues">
+				<input type="date" placeholder="date_of_consultation" class="box"
+					id="number" name = "date_of_consultation"> 
 					<input type="time" placeholder="Start_time"
-					class="box" id="age" name = "start time"> 
+					class="box" id="age" name = "start_time"> 
 					<input type="time"
-					placeholder="End_time" class="box" name = "end time">
+					placeholder="End_time" class="box" name = "end_time">
 					  <input type ="hidden" name = "doctor_id" value = "<%=request.getParameter("id")%>">
 				<button class="btn" id="book_now" type="submit">Book Now</button>
 				
@@ -69,6 +77,9 @@
 		<jsp:include page="footer.jsp"></jsp:include>
 
 	</section>
+	
+	
+	
 	<script src="./../../Components/header.js"></script>
 	<script src="../../assets/js/appointment.js"></script>
 	<script src="../../Components/footer.js"></script>

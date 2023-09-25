@@ -15,14 +15,15 @@
 <body>
 	<!-- header section starts  -->
 
+
 	<header class="header" id="header"></header>
 	<header class="header">
-		<a href="../Doctor/index.html" class="logo"> <img
+		<a href="index" class="logo"> <img
 			src="./assets/img/image.png" alt="logo" id="logo_image">
 		</a>
 
 		<nav class="navbar">
-			<a href="index.jsp">Home</a>
+			<a href="index">Home</a>
 
 		</nav>
 		<div id="menu-btn" class="fas fa-bars"></div>
@@ -58,7 +59,14 @@
 					<br>
 					<div>
 						<label for="password"> Password</label> <br> <input
-							type="password" required=true name="password"> <br>
+							type="password" required name="password"> 
+							<span id="passwordToggle" class="password-toggle">
+                                    <i id="toggleIcon" class="fa fa-eye"></i>
+                                  </span>
+
+							
+							<br>
+							
 					</div>
 					<div></div>
 					<br>
@@ -88,7 +96,7 @@
 					<br>
 					<button type="submit">Submit</button>
 					<p>
-                            <a href="<%=request.getContextPath() %>/Doctor_signup.jsp">Already a member</a>
+                            <a href="<%=request.getContextPath() %>/doctorlogin">Already a member</a>
                             
                         </p>
 				</form>
@@ -97,13 +105,40 @@
 		</div>
 	</div>
 
-	<script>
-        // Show/hide doctor fields based on the checkbox
-        document.getElementById("isDoctor").addEventListener("change", function() {
-            var doctorFields = document.getElementById("doctorFields");
-            doctorFields.style.display = this.checked ? "block" : "none";
-        });
-    </script>
+	<script type="text/javascript">
+const passwordToggle = document.getElementById("passwordToggle");
+const toggleIcon = document.getElementById("toggleIcon");
+passwordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    toggleIcon.classList.remove("fa-eye");
+    toggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    toggleIcon.classList.remove("fa-eye-slash");
+    toggleIcon.classList.add("fa-eye");
+  }
+});
+
+const PasswordToggle = document.getElementById("PasswordToggle");
+const ToggleIcon = document.getElementById("ToggleIcon");
+PasswordToggle.addEventListener("click", () => {
+  const passwordInput = document.getElementById("confirm_password");
+  const type = passwordInput.getAttribute("type");
+  if (type === "password") {
+    passwordInput.setAttribute("type", "text");
+    ToggleIcon.classList.remove("fa-eye");
+    ToggleIcon.classList.add("fa-eye-slash");
+  } else {
+    passwordInput.setAttribute("type", "password");
+    ToggleIcon.classList.remove("fa-eye-slash");
+    ToggleIcon.classList.add("fa-eye");
+  }
+});
+</script>
+
 
 </body>
 </html>

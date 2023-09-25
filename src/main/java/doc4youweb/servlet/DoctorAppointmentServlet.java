@@ -17,7 +17,7 @@ import in.fssa.doc4you.dto.DoctorDTO;
 import in.fssa.doc4you.service.AppointmentService;
 
 
-@WebServlet("/DoctorAppointmentServlet")
+@WebServlet("/doctor_appointment")
 public class DoctorAppointmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
