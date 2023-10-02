@@ -1,4 +1,10 @@
+
+
+
 <!DOCTYPE html>
+<%@page import="in.fssa.doc4you.model.User"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="in.fssa.doc4you.exception.ServiceException"%>
 <%@page import="java.util.Set"%>
@@ -22,16 +28,31 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
 </head>
 
 <body>
+	<%
+    User user = (User) request.getAttribute("loggedUser");
+    HttpSession session1 = request.getSession(false); // Do not create a new session if it doesn't exist
 
+    if (session1 == null || session1.getAttribute("loggedUser") == null) {
+        // Session is invalid or not present, display an alert and redirect to login page
+%>
+	<script>
+    alert("Your session has expired. Please log in again.");
+    window.location.href = "<%= request.getContextPath() %>/login"; // Replace with your login page URL
+</script>
+	<%
+        return; // Stop processing the rest of the JSP page
+    }
+%>
 
-   <jsp:include page = "header.jsp"></jsp:include>
-   <%
+	<jsp:include page="header.jsp"></jsp:include>
+	<%
    DoctorService doctorService = new DoctorService();
-   Set<DoctorDTO> doctors = new HashSet<DoctorDTO>();
+   List<DoctorDTO> doctors = new ArrayList<DoctorDTO>();
 	try {
 		doctors = doctorService.findAllByDoctors();
 		
@@ -42,60 +63,54 @@
 	}
    %>
 
-    <section class="doctors" id="doctors">
+	<section class="doctors" id="doctors">
 
-        <h1 class="heading">
-            our <span>doctors</span>
-        </h1>
+		<h1 class="heading">
+			our <span>doctors</span>
+		</h1>
 
-        <section class="filter">
-            <div class="wrapper">
-                <div id="search-container">
-                    <input type="search" id="search-item" placeholder="search for doctors" onkeyup="search()">
-                    <button id="search">Search</button>
-                </div>
-            </div>
+		<section class="filter">
+			<div class="wrapper">
+				<div id="search-container">
+					<input type="search" id="search-item"
+						placeholder="search for doctors" onkeyup="search()">
+					<button id="search">Search</button>
+				</div>
+			</div>
 
-        </section>
+		</section>
 
-        <div class="box-container" id="doctor-list" style = "gap:5rem;">
-<%for ( DoctorDTO doctor:doctors) {
+		<div class="box-container" id="doctor-list" style="gap: 5rem;">
+			<%for ( DoctorDTO doctor:doctors) {
     
 %>
-    <div class="Box">
-        <a href="<%= doctor.getDoctorId() %>">
-            <img src="<%= doctor.getDoctorImage()  %>" alt="<%= doctor.getFirstName()+""+doctor.getLastName() %>">
-        </a>
-        <h3><%= doctor.getFirstName()+""+doctor.getLastName()  %></h3>
-        <span><%= doctor.getDepartment() %></span>
-        <div>
-<a href="<%= request.getContextPath() %>/appointment/booknew?id=<%= doctor.getId() %>"
-   style="display: inline-block;
-   margin-top:.5rem;
-          padding: 5px 15px;
-          background-color: white;
-          border:1.5px solid #0e6453 ;
-          border-color:#0e6453;
-          color:#0e6453;
-          font-size:10px;
-          text-decoration: none;
-          border-radius: 5px;">
-    Book Appointment
-</a>        </div>
-        
-    </div>
-<%
+			<div class="Box">
+				<a href="<%= doctor.getDoctorId() %>"> <img
+					src="<%= doctor.getDoctorImage()  %>"
+					alt="<%= doctor.getFirstName()+""+doctor.getLastName() %>">
+				</a>
+				<h3><%= doctor.getFirstName()+""+doctor.getLastName()  %></h3>
+				<span><%= doctor.getDepartment() %></span>
+				<div>
+					<a
+						href="<%= request.getContextPath() %>/appointment/booknew?id=<%= doctor.getId() %>"
+						style="display: inline-block; margin-top: .5rem; padding: 5px 15px; background-color: white; border: 1.5px solid #0e6453; border-color: #0e6453; color: #0e6453; font-size: 10px; text-decoration: none; border-radius: 5px;">
+						Book Appointment </a>
+				</div>
+
+			</div>
+			<%
 }
 %>
-        </div>
+		</div>
 
-    </section>
+	</section>
 
-    <section class="footer">
+	<section class="footer">
 		<jsp:include page="footer.jsp"></jsp:include>
 
 	</section>
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function search() {
 	  const searchBox = document.getElementById("search-item");
@@ -107,8 +122,9 @@ function search() {
 	    const h3Element = box.querySelector("h3");
 	    const spanElement = box.querySelector("span");
 
-	    const h3Text = h3Element ? h3Element.textContent.toLowerCase() : "";
-	    const spanText = spanElement ? spanElement.textContent.toLowerCase() : "";
+	    const h3Text = h3Element ? h3Element.textContent.trim().toLowerCase() : ""; // Trim whitespace from h3 content
+	    const spanText = spanElement ? spanElement.textContent.trim().toLowerCase() : ""; // Trim whitespace from span content
+
 
 	    if (h3Text.includes(searchText) || spanText.includes(searchText)) {
 	      box.style.display = "";
@@ -124,7 +140,21 @@ function search() {
 
 </script>
 
+	<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
 
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
+	
+	</script>
 </body>
 
 </html>

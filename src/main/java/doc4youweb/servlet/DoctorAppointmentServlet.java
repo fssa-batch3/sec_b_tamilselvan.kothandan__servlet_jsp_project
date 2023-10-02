@@ -32,7 +32,7 @@ public class DoctorAppointmentServlet extends HttpServlet {
 	            return;
 	        }
 
-	        Set<AppointmentDTO> appointments = null;
+	        List<AppointmentDTO> appointments = null;
 			try {
 				appointments = findAllAppointmentsByDoctorId(doctorDTO.getDoctorId());
 			} catch (Exception e) {
@@ -52,8 +52,8 @@ public class DoctorAppointmentServlet extends HttpServlet {
 	        
 	    }
 
-	    private Set<AppointmentDTO> findAllAppointmentsByDoctorId(int doctorId) throws Exception {
-	        Set<AppointmentDTO> appointments = new HashSet<>();
+	    private List<AppointmentDTO> findAllAppointmentsByDoctorId(int doctorId) throws Exception {
+	    	List<AppointmentDTO> appointments = new ArrayList<>();
 
 	        try {
 	            AppointmentService appointmentService = new AppointmentService();

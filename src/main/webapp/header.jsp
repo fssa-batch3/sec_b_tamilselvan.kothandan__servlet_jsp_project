@@ -1,32 +1,34 @@
 <%@page import="in.fssa.doc4you.model.User"%>
 <header class="header" id="header">
-<% User user = (User) session.getAttribute("loggedUser");
+	<%
+	User user = (User) session.getAttribute("loggedUser");
 
-boolean isLogin_in = user != null;
-%>
-<%
-if (isLogin_in == false) {
-%>
-	<a href="index.jso" class="logo"> <img src="<%=request.getContextPath() %>/assets/img/image.png" alt="logo"
+	boolean isLogin_in = user != null;
+	%>
+	<%
+	if (isLogin_in == false) {
+	%>
+	<a href="index.jso" class="logo"> <img
+		src="<%=request.getContextPath()%>/assets/img/image.png" alt="logo"
 		id="logo_image">
 	</a>
 	<nav class="navbar">
-		<a href="index">Home</a>  <a
-			href="about">About</a> <a href="login">Login</a>  <a href="doctor_create">Doctor Registration</a>
+		<a href="index">Home</a> <a href="about">About</a> <a
+			href="sign_in.jsp">Registration</a>
 	</nav>
 	<div id="menu-btn" class="fas fa-bars"></div>
 
-<%
-} else {
-%>
+	<%
+	} else {
+	%>
 
-	<a href="index.jsp" class="logo"> <img src="<%=request.getContextPath() %>/assets/img/image.png"" alt="logo"
+	<a href="index.jsp" class="logo"> <img
+		src="<%=request.getContextPath()%>/assets/img/image.png" " alt="logo"
 		id="logo_image">
 	</a>
-	
+
 	<nav class="navbar" id="navbar">
-		<a href="index">Home</a> <a href="about">About</a> <a
-			href="doctor">Doctors</a> 
+		<a href="index">Home</a> <a href="about">About</a> <a href="doctor">Doctors</a>
 		<div class="dropdown">
 			<button class="dropbtn" id="dropdtn" style='margin-left: 2rem;'>
 				<i class='fa-solid fa-circle-user'
@@ -38,10 +40,10 @@ if (isLogin_in == false) {
 			</div>
 		</div>
 	</nav>
-	
+
 	<div id="menu-btn" class="fas fa-bars"></div>
 
-<%
-}
-%>
+	<%
+	}
+	%>
 </header>

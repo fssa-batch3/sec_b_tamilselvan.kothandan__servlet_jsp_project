@@ -43,7 +43,7 @@
                                     <i id="toggleIcon" class="fa fa-eye"></i>
                                   </span>
 
-                        <button type="submit">Submit</button>
+                        <input type="submit" value="Login">
                         <p>
                             <a href="doctor_create">Not a Member</a>
                         </p>
@@ -84,5 +84,20 @@ PasswordToggle.addEventListener("click", () => {
   }
 });
 </script>
+<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
+
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
+	
+	</script>
 </body>
 </html>

@@ -17,7 +17,8 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
 
 </head>
 
@@ -33,7 +34,7 @@
 
 	<jsp:include page="header.jsp"></jsp:include>
 
-<%System.out.println("doctor id : "+request.getAttribute("doctor id")); %>
+	<%System.out.println("doctor id : "+request.getAttribute("doctor id")); %>
 
 
 	<section class="book" id="book">
@@ -49,23 +50,37 @@
 					src="<%=request.getContextPath() %>/assets/img/Medical prescription.gif"
 					alt="">
 			</div>
-			<%User user = (User)request.getAttribute("loggedUser"); %>
-			<form action = "create" method = "POST">
+			<%
+    User user = (User) request.getAttribute("loggedUser");
+    HttpSession session1 = request.getSession(false); // Do not create a new session if it doesn't exist
+
+    if (session1 == null || session1.getAttribute("loggedUser") == null) {
+        // Session is invalid or not present, display an alert and redirect to login page
+%>
+			<script>
+    alert("Your session has expired. Please log in again.");
+    window.location.href = "<%= request.getContextPath() %>/login"; // Replace with your login page URL
+</script>
+			<%
+        return; // Stop processing the rest of the JSP page
+    }
+%>
+			<form action="create" method="POST">
 				<h3>Book Appointment</h3>
 				<input type="text" placeholder="First_name" class="box"
-					id="first_name" value="<%= user.getFirstName()%>"> 
-					<input type="text" placeholder="last_name" class="box" id="last_name" value="<%=user.getLastName()%>"> 
-					<input type="text"
-					placeholder="Reason for consulation" class="box" name = "health_issues">
-				<input type="date" placeholder="date_of_consultation" class="box"
-					id="number" name = "date_of_consultation"> 
-					<input type="time" placeholder="Start_time"
-					class="box" id="age" name = "start_time"> 
-					<input type="time"
-					placeholder="End_time" class="box" name = "end_time">
-					  <input type ="hidden" name = "doctor_id" value = "<%=request.getParameter("id")%>">
+					id="first_name" value="<%= user.getFirstName()%>"> <input
+					type="text" placeholder="last_name" class="box" id="last_name"
+					value="<%=user.getLastName()%>"> <input type="text"
+					placeholder="Reason for consulation" class="box"
+					name="health_issues"> <input type="date"
+					placeholder="date_of_consultation" class="box" id="number"
+					name="date_of_consultation"> <input type="time"
+					placeholder="Start_time" class="box" id="age" name="start_time">
+				<input type="time" placeholder="End_time" class="box"
+					name="end_time"> <input type="hidden" name="doctor_id"
+					value="<%=request.getParameter("id")%>">
 				<button class="btn" id="book_now" type="submit">Book Now</button>
-				
+
 
 			</form>
 
@@ -77,12 +92,24 @@
 		<jsp:include page="footer.jsp"></jsp:include>
 
 	</section>
+	<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
+
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
 	
-	
-	
-	<script src="./../../Components/header.js"></script>
-	<script src="../../assets/js/appointment.js"></script>
-	<script src="../../Components/footer.js"></script>
+	</script>
+
+
+
 
 </body>
 

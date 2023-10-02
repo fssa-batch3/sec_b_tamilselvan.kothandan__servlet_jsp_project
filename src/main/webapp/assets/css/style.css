@@ -243,62 +243,76 @@
 
 
   /* doctor section start */
+/* Define the grid container */
+.doctors .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 5rem;
+}
 
-  .doctors .box-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-      gap: 5rem;
-  }
-
-  .doctors .box-container .Box {
-      text-align: center;
+/* Style individual cards within the grid */
+.doctors .box-container .Box {
+	
+	text-align: center;
       background: #fff;
       border-radius: .5rem;
       border: var(--border);
       box-shadow: var(--box-shadow);
       padding: 2rem;
-     width: min-content;
-      height: auto ;
-  }
+     width: 100%; /* Change to 100% to ensure cards take up the entire column */
+    height: auto; 
+	
 
-  .doctors .box-container .Box img {
-      height: 20rem;
-      border: var(--border);
-      border-radius: .5rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-  }
+}
 
-  .doctors .box-container .Box h3 {
-      color: var(--black);
-      font-size: 2.5rem;
-  }
+/* Style images within the cards */
+.doctors .box-container .Box img {
+    max-height: 20rem; /* Use max-height to maintain aspect ratio */
+    border: 1px solid var(--border); /* Assuming --border is a CSS variable */
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
 
-  .doctors .box-container .Box span {
-      color: var(--green);
-      font-size: 1.5rem;
-  }
+/* Style heading */
+.doctors .box-container .Box h3 {
+    color: var(--black); /* Assuming --black is a CSS variable */
+    font-size: 2.5rem;
+}
 
-  .doctors .box-container .Box .share {
-      padding-top: 2rem;
-  }
+/* Style additional text */
+.doctors .box-container .Box span {
+    color: var(--green); /* Assuming --green is a CSS variable */
+    font-size: 1.5rem;
+}
 
-  .doctors .box-container .Box .share a {
-      height: 5rem;
-      width: 5rem;
-      line-height: 4.5rem;
-      font-size: 2rem;
-      color: var(--green);
-      border-radius: .5rem;
-      border: var(--border);
-      margin: .3rem;
-  }
+/* Style the "share" section */
+.doctors .box-container .Box .share {
+    padding-top: 2rem;
+}
 
-  .doctors .box-container .Box .share a:hover {
-      background: var(--green);
-      color: #fff;
-      box-shadow: var(--box-shadow);
-  }
+/* Style anchor links in the "share" section */
+.doctors .box-container .Box .share a {
+    height: 5rem;
+    width: 5rem;
+    line-height: 4.5rem;
+    font-size: 2rem;
+    color: var(--green); /* Assuming --green is a CSS variable */
+    border-radius: 0.5rem;
+    border: 1px solid var(--border); /* Assuming --border is a CSS variable */
+    margin: 0.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* Hover effect for anchor links */
+.doctors .box-container .Box .share a:hover {
+    background: var(--green); /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+    box-shadow: var(--box-shadow); /* Assuming --box-shadow is a CSS variable */
+}
 
   /* doctor section end */
 

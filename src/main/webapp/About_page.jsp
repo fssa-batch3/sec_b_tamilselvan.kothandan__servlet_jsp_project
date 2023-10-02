@@ -2,62 +2,72 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOC 4 YOU</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOC 4 YOU</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 
 <body>
 
-    <!-- header section starts  -->
+	<!-- header section starts  -->
 
-    < <jsp:include page = "header.jsp"></jsp:include>
+	<
+	<jsp:include page="header.jsp"></jsp:include>
 
-    <!-- about section starts -->
+	<!-- about section starts -->
 
-    <section class="about" id="about">
+	<section class="about" id="about">
 
-        <h1 class="heading">
-            <span>about</span> us
-        </h1>
+		<h1 class="heading">
+			<span>about</span> us
+		</h1>
 
-        <div class="row">
+		<div class="row">
 
-            <div class="image">
-                <img src="./assets/img/tech company-bro.png" alt="">
-            </div>
+			<div class="image">
+				<img src="./assets/img/tech company-bro.png" alt="">
+			</div>
 
-            <div class="content">
-                <h3>we take care of your healthy life</h3>
-                <p>Doc 4 you. You can totally rely on us. Through this website, users can schedule appointments,
-                    view doctor and hospital appointment lists and find the doctors and hospitals they require. People
-                    with disabilities who were unable to visit the hospital came up with the idea. They schedule
-                    appointments in person or via video conference to seek Doc 4 You since it is more beneficial.
-                </p>
+			<div class="content">
+				<h3>we take care of your healthy life</h3>
+				<p>Doc 4 you. You can totally rely on us. Through this website,
+					users can schedule appointments, view doctor and hospital
+					appointment lists and find the doctors and hospitals they require.
+					People with disabilities who were unable to visit the hospital came
+					up with the idea. They schedule appointments in person or via video
+					conference to seek Doc 4 You since it is more beneficial.</p>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-    </section>
+	</section>
 
-    <!-- about section ends -->
+	<!-- about section ends -->
 
-    <!-- footer section starts -->
+	<!-- footer section starts -->
 
-    <section class="footer">
-        <div class="box-container" id="box-container"></div>
+	<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
 
-    </section>
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
 
-    <script src="../../Components/header.js"></script>
-    <script src="../../Components/footer.js"></script>
-
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
+	
+	</script>
 </body>
 
 </html>

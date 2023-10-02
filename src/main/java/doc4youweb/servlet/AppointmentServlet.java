@@ -1,9 +1,8 @@
 package doc4youweb.servlet;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +31,7 @@ public class AppointmentServlet extends HttpServlet {
 		}
 		
 
-		Set<AppointmentDTO> appointments = findAllAppointmentByUserId(user.getId());
+		List<AppointmentDTO> appointments = findAllAppointmentByUserId(user.getId());
 		System.out.println("Appointments" + appointments);
 		request.setAttribute("appointments", appointments);
 
@@ -50,8 +49,8 @@ public class AppointmentServlet extends HttpServlet {
 		return user;
 	}
 
-	private Set<AppointmentDTO> findAllAppointmentByUserId(int userId) {
-		Set<AppointmentDTO> appointments = new HashSet<>();
+	private List<AppointmentDTO> findAllAppointmentByUserId(int userId) {
+		List<AppointmentDTO> appointments = new ArrayList<>();
 
 		try {
 			AppointmentDAO appointmentDAO = new AppointmentDAO();
@@ -65,5 +64,7 @@ public class AppointmentServlet extends HttpServlet {
 		}
 
 		return appointments;
+		
+		
 	}
 }

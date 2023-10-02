@@ -14,9 +14,6 @@ import in.fssa.doc4you.exception.ValidationException;
 import in.fssa.doc4you.model.User;
 import in.fssa.doc4you.service.UserService;
 
-/**
- * Servlet implementation class CreateUSerServlet
- */
 @WebServlet("/create")
 public class CreateUSerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

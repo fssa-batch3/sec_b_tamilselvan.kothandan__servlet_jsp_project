@@ -38,7 +38,7 @@
             <div class="container">
                 <div class="login">
                     <form method = "post" role="form" id="sign-up" action="create" >
-                        <h1>REGISTER</h1>
+                        <h1>PATIENT REGISTER</h1>
                         <hr >
                         <p>Explore the MEDICAL SERVICE!</p>
                         <label>First name:</label>
@@ -81,8 +81,11 @@
                                   </span>
 
         <input type="submit" value="Register">
-                        <p>
-                            <a href="../products/login.html">Already a member</a>
+                        <p >
+                            <a href="login" style="text-decoration: underline; text-decoration-color: #0e6453; font-size:1rem;">Already a member as Patient</a><br></p>
+                           <p style="margin-top:-1rem; color: #0e6453;"> (or)</p><br>
+                           <p style="margin-top:-2rem;">
+                            <a href = "doctorlogin" style="text-decoration: underline; text-decoration-color: #0e6453; font-size:1rem;">Already a member as Doctor</a>
                         </p>
                         
                     </form>
@@ -127,5 +130,20 @@ PasswordToggle.addEventListener("click", () => {
   }
 });
     </script>
+    <script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
+
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
+	
+	</script>
     </body>
 </html>

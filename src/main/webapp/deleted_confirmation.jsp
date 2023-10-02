@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
-        <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,14 +21,33 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
 <script src="./main.js"></script>
 </head>
 
 <body>
 
-<h1>Account Deleted</h1>
-    <p>${message}</p>
-    <p><a href="index">Back to Home</a></p>
+	<h1>Account Deleted</h1>
+	<p>${message}</p>
+	<p>
+		<a href="index">Back to Home</a>
+	</p>
+
+	<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
+
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
+	
+	</script>
 </body>
 </html>

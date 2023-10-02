@@ -18,8 +18,8 @@
 
 	<header class="header" id="header"></header>
 	<header class="header">
-		<a href="index" class="logo"> <img
-			src="./assets/img/image.png" alt="logo" id="logo_image">
+		<a href="index" class="logo"> <img src="./assets/img/image.png"
+			alt="logo" id="logo_image">
 		</a>
 
 		<nav class="navbar">
@@ -39,7 +39,7 @@
 			</div>
 			<div class="login">
 				<form action="doctor_create" method="POST">
-					<h2>Add new Doctor</h2>
+					<h1>Doctor Registration</h1>
 					<div>
 						<label for="first name">First name</label> <br> <input
 							type="text" required=true name="first name"> <br>
@@ -51,7 +51,7 @@
 							type="text" required=true name="last name"> <br>
 					</div>
 					<br>
-										<div>
+					<div>
 						<label for="email"> Email</label> <br> <input type="email"
 							required=true name="email"> <br>
 					</div>
@@ -59,14 +59,11 @@
 					<br>
 					<div>
 						<label for="password"> Password</label> <br> <input
-							type="password" required name="password"> 
-							<span id="passwordToggle" class="password-toggle">
-                                    <i id="toggleIcon" class="fa fa-eye"></i>
-                                  </span>
+							type="password" required name="password"> <span
+							id="passwordToggle" class="password-toggle"> <i
+							id="toggleIcon" class="fa fa-eye"></i>
+						</span> <br>
 
-							
-							<br>
-							
 					</div>
 					<div></div>
 					<br>
@@ -78,7 +75,8 @@
 					<br>
 					<div>
 						<label for="experience">Experience</label> <br> <input
-							type="number" required="true" name="experience"> <br>
+							type="number" required="true" name="experience" step="1">
+						<br>
 					</div>
 					<div></div>
 					<br>
@@ -96,9 +94,10 @@
 					<br>
 					<button type="submit">Submit</button>
 					<p>
-                            <a href="<%=request.getContextPath() %>/doctorlogin">Already a member</a>
-                            
-                        </p>
+						<a href="<%=request.getContextPath() %>/doctorlogin">Already a
+							member</a>
+
+					</p>
 				</form>
 			</div>
 
@@ -106,6 +105,23 @@
 	</div>
 
 	<script type="text/javascript">
+	
+	// Get the input element
+    var experienceInput = document.getElementById("experienceInput");
+
+    // Add an input event listener to validate the input
+    experienceInput.addEventListener("input", function () {
+        var inputValue = experienceInput.value;
+
+        // Use a regular expression to check if the input is a valid number
+        var isValidNumber = /^[0-9]+(\.[0-9]+)?$/.test(inputValue);
+
+        if (!isValidNumber) {
+            // If not a valid number, clear the input field
+            experienceInput.value = "";
+        }
+    });
+	
 const passwordToggle = document.getElementById("passwordToggle");
 const toggleIcon = document.getElementById("toggleIcon");
 passwordToggle.addEventListener("click", () => {
@@ -138,6 +154,9 @@ PasswordToggle.addEventListener("click", () => {
   }
 });
 </script>
+
+
+
 
 
 </body>

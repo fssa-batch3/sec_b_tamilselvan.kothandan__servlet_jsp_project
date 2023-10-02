@@ -12,73 +12,57 @@ import in.fssa.doc4you.dto.AppointmentDTO;
 import in.fssa.doc4you.enumfiles.Status;
 import in.fssa.doc4you.model.Appointment;
 
-/**
- * Servlet implementation class AcceptOrRejectAppointmentServlet
- */
 @WebServlet("/AcceptAppointment")
 public class AcceptAppointmentServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public AcceptAppointmentServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Remove the unnecessary response.getWriter() line
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Accept an appointment
-		String appointmentIdStr = request.getParameter("appointmentId");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Accept an appointment
+        String appointmentIdStr = request.getParameter("appointmentId");
 
-	    if (appointmentIdStr != null && !appointmentIdStr.isEmpty()) {
-	        try {
-	            int appointmentId = Integer.parseInt(appointmentIdStr);
+        if (appointmentIdStr != null && !appointmentIdStr.isEmpty()) {
+            try {
+                int appointmentId = Integer.parseInt(appointmentIdStr);
 
-	            System.out.println(appointmentId);
-	            
-	            AppointmentDAO appointmentDAO = new AppointmentDAO();
-	            AppointmentDTO appointment = appointmentDAO.findAppointmentByAppointmentId(appointmentId);
+                System.out.println(appointmentId);
 
-	            Appointment app = new Appointment();
-	            app.setId(appointmentId);
-	            app.setStatus(appointment.getStatus());
-	            
-	            if (app != null && app.getStatus().equals(Status.On_process)) {
-	                app.setStatus(Status.Approved);
-	                
-	                appointmentDAO.updateAppointmentStatus(app.getId(), app);
+                AppointmentDAO appointmentDAO = new AppointmentDAO();
+                AppointmentDTO appointment = appointmentDAO.findAppointmentByAppointmentId(appointmentId);
 
-	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
-	            }else if (app != null && app.getStatus().equals(Status.Cancelled)) {
-	                String errorMessage = "Appointment is already Cancelled and cannot be Rejected or Approve.";
-	                request.setAttribute("errorMessage", errorMessage);
-	                response.getWriter().println("<script>alert('" + errorMessage + "');</script>");
-	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
-	            }else {
-	            	String errorMessage = "Appointment is not valid or has already been Approved.";
-	                request.setAttribute("errorMessage", errorMessage);
-	                response.getWriter().println("<script>alert('" + errorMessage + "');</script>");
-	                response.sendRedirect(request.getContextPath() + "/doctor_appointment");
-	            }
-	         
-	        }catch (Exception e) {
-	            
-	            e.printStackTrace();   }
-	    } 
-	        
+                if (appointment != null) {
+                    Appointment acceptAppointment = new Appointment();
+                    acceptAppointment.setId(appointmentId);
+                    acceptAppointment.setStatus(appointment.getStatus());
+                    System.out.println("if " + acceptAppointment.getStatus());
+                    
+                    if (acceptAppointment.getStatus() == Status.On_process) {
+                        acceptAppointment.setStatus(Status.Approved);
+                        
+                        appointmentDAO.updateAppointmentStatus(acceptAppointment.getId(), acceptAppointment);
 
-	}
-
+                        response.sendRedirect(request.getContextPath() + "/doctor_appointment");
+                    } else {
+                        response.getWriter().print("<script>alert('Appointment is already Cancelled and cannot be Rejected or Approve.');");
+                        response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctor_appointment\"");
+                        response.getWriter().print("</script>");
+                    }
+                } else {
+                    // Handle the case when the appointment is not found
+                }
+            } catch (NumberFormatException e) {
+                // Handle the case when appointmentIdStr is not a valid integer
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

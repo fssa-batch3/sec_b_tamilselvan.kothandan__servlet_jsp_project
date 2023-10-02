@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ErrorHandlerServlet
- */
+
 @WebServlet("/ErrorHandler")
 public class ErrorHandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -23,7 +21,10 @@ public class ErrorHandlerServlet extends HttpServlet {
             request.getRequestDispatcher("/404error.jsp").forward(request, response);
         }else if(statusCode != null && statusCode == 500) {
         	request.getRequestDispatcher("/500error.jsp").forward(request, response);
-        }else {
+        }else if(statusCode != null && statusCode == 405) {
+        	request.getRequestDispatcher("/405error.jsp").forward(request, response);
+        }
+        else {
             request.getRequestDispatcher("/genericError.jsp").forward(request, response);
         }
 	}

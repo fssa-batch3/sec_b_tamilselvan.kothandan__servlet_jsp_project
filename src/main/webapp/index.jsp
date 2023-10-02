@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
-        <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,27 +21,29 @@
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
 
-<link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
 <script src="./main.js"></script>
 </head>
 
 <body>
 
 
-<c:if test="${not empty logoutMessage}">
-    <div class="success-message">${logoutMessage}</div>
-</c:if>
+	<c:if test="${not empty logoutMessage}">
+		<div class="success-message">${logoutMessage}</div>
+	</c:if>
 
 	<jsp:include page="header.jsp"></jsp:include>
 
 
 
-	
+
 
 	<section class="home" id="home">
 
 		<div class="image">
-			<img src="<%=request.getContextPath() %>/assets/img/Doctors-bro.svg" alt="">
+			<img src="<%=request.getContextPath() %>/assets/img/Doctors-bro.svg"
+				alt="">
 		</div>
 
 		<div class="content">
@@ -163,8 +165,21 @@
 	<!-- footer section ends -->
 
 
+	<script type="text/javascript">
+	 const menu = document.querySelector("#menu-btn");
+	    const navbar = document.querySelector(".navbar");
+
+	    menu.addEventListener("click", () => {
+	      menu.classList.toggle("fa-times");
+	      navbar.classList.toggle("active");
+	    });
+
+	    window.onscroll = () => {
+	      menu.classList.remove("fa-times");
+	      navbar.classList.remove("active");
+	    };
 	
-	<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
+	</script>
 </body>
 
 </html>
