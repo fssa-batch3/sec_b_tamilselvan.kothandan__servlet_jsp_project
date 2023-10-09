@@ -50,7 +50,7 @@
 		</a>
 
 		<nav class="navbar">
-			<a href="doctorLogout">logout</a> <a href="doctor_profile.jsp">Profile</a>
+			<a href="doctorLogout">logout</a> <a href="doctor_profile">Profile</a>
 		</nav>
 		<div id="menu-btn" class="fas fa-bars"></div>
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@page
-	import="com.google.protobuf.DescriptorProtos$MethodOptions.IdempotencyLevel"%>
+
 <%@page import="in.fssa.doc4you.dto.DoctorDTO"%>
 <html lang="en" dir="ltr">
 
@@ -9,13 +8,15 @@
 <title>Doctor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="../assets/css/style.css" rel="stylesheet">
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
 
 </head>
 
@@ -26,7 +27,7 @@
 		</a>
 
 		<nav class="navbar">
-			<a href="./index.html">profile</a> <a href="./dashboard.html">Appointment
+			<a href="./index.html">profile</a> <a href="doctor_appointment">Appointment
 				list</a> <a href="" id="logoutLink">logout</a>
 		</nav>
 		<div id="menu-btn" class="fas fa-bars"></div>
@@ -35,7 +36,7 @@
 
 	<%
 	DoctorDTO lD = (DoctorDTO) request.getAttribute("doctorProfile");
-
+System.out.println("profile "+lD);
 	if (lD != null) {
 	%>
 
@@ -72,7 +73,7 @@
 						type="text" readonly value="<%=lD.getDoctorImage()%>">
 				</div>
 			</div>
-			<button class="btn-2" id="edit-btn">Edit Profile</button>
+			<button class="btn-2" id="edit-btn" onclick="editProfile(<%= lD.getDoctorId() %>)" > Edit Profile</button>
 			<button class="btn-2" id="delete-btn">Delete profile</button>
 
 		</div>
@@ -80,7 +81,11 @@
 	<%
 	}
 	%>
-	<script src="../Components/doctor_sidebar.js"></script>
+	<script >
+	function editProfile(doctorId) {
+	    window.location.href = '<%= request.getContextPath() %>/doctor_edit_profile.jsp?doctor-id=' + doctorId;
+	}
+	</script>
 	<script src="../assets/js/doctorProfile.js"></script>
 </body>
 

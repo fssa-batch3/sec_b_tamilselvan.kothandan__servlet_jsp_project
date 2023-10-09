@@ -1,102 +1,84 @@
 <!DOCTYPE html>
-   <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
-    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DOC 4 YOU</title>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOC 4 YOU</title>
 
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        >
-        <link rel="stylesheet" href="<%=request.getContextPath() %>/assets/css/style.css">
-    </head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath() %>/assets/css/style.css">
+</head>
 
-    <body>
-    
-    <c:if test="${not empty successMessage}">
-        <div class="success-message">${successMessage}</div>
-    </c:if>
+<body>
 
-    <!-- Display failure message if it exists -->
-    <c:if test="${not empty failureMessage}">
-        <div class="error-message">${failureMessage}</div>
-    </c:if>
-    
-        <!-- header section starts  -->
+	<c:if test="${not empty successMessage}">
+		<div class="success-message">${successMessage}</div>
+	</c:if>
 
-        <jsp:include page = "header.jsp"></jsp:include>
+	<!-- Display failure message if it exists -->
+	<c:if test="${not empty failureMessage}">
+		<div class="error-message">${failureMessage}</div>
+	</c:if>
 
-        <!-- header section ends -->
+	<!-- header section starts  -->
 
-        <div class="signin">
-            <div class="container">
-                <div class="login">
-                    <form method = "post" role="form" id="sign-up" action="create" >
-                        <h1>PATIENT REGISTER</h1>
-                        <hr >
-                        <p>Explore the MEDICAL SERVICE!</p>
-                        <label>First name:</label>
-                        <input
-                            type="text"
-                            name = "first_name"
-                            id="userName"
-                            pattern="[a-zA-Z0-9]+"
-                            placeholder="abc@exampl.com"
-                        >
-                        <label>Last name:</label>
-                        <input
-                            type="text"
-                            name = "last_name"
-                            id="userName"
-                            pattern="[a-zA-Z0-9]+"
-                            placeholder="abc@exampl.com"
-                        >
-                        <label>Email</label>
-                        <input
-                            type="text"
-                            placeholder="abc@exampl.com"
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            id="email"
-                            name = "email"
-                        >
-                        <label>Password</label>
-                        <span style="color: #0e6453">
-                            Note: 1 number, 1 upper_case/lower_case, 8+ char.
-                        </span>
-                        <input
-                        name = "password"
-                            type="password"
-                            placeholder="enter your password!"
-                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                            id="password"
-                        >
-                        <span id="passwordToggle" class="password-toggle">
-                                    <i id="toggleIcon" class="fa fa-eye"></i>
-                                  </span>
+	<jsp:include page="header.jsp"></jsp:include>
 
-        <input type="submit" value="Register">
-                        <p >
-                            <a href="login" style="text-decoration: underline; text-decoration-color: #0e6453; font-size:1rem;">Already a member as Patient</a><br></p>
-                           <p style="margin-top:-1rem; color: #0e6453;"> (or)</p><br>
-                           <p style="margin-top:-2rem;">
-                            <a href = "doctorlogin" style="text-decoration: underline; text-decoration-color: #0e6453; font-size:1rem;">Already a member as Doctor</a>
-                        </p>
-                        
-                    </form>
-                </div>
-                <div class="pic">
-                    <img src="<%= request.getContextPath() %>/assets/img/Sign up-bro.png" alt="sign_up image">
-                </div>
-            </div>
-        </div>
+	<!-- header section ends -->
 
-<script type="text/javascript">
+	<div class="signin">
+		<div class="container">
+			<div class="login">
+				<form method="post" role="form" id="sign-up" action="create">
+					<h1>PATIENT REGISTER</h1>
+					<hr>
+					<p>Explore the MEDICAL SERVICE!</p>
+					<label>First name:</label> <input type="text" name="first_name"
+						id="userName" pattern="[a-zA-Z0-9]+" placeholder="abc@exampl.com">
+					<label>Last name:</label> <input type="text" name="last_name"
+						id="userName" pattern="[a-zA-Z0-9]+" placeholder="abc@exampl.com">
+					<label>Email</label> <input type="text"
+						placeholder="abc@exampl.com"
+						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="email"
+						name="email"> <label>Password</label>
+					<span style="color: #0e6453"> Note: 1 number, 1
+						upper_case/lower_case, 8+ char. </span> <input name="password"
+						type="password" placeholder="enter your password!"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password">
+					<span id="passwordToggle" class="password-toggle"> <i
+						id="toggleIcon" class="fa fa-eye"></i>
+					</span> <input type="submit" value="Register">
+					<p>
+						<a href="login"
+							style="text-decoration: underline; text-decoration-color: #0e6453; font-size: 1rem;">Already
+							a member as Patient</a><br>
+					</p>
+					<p style="margin-top: -1rem; color: #0e6453;">(or)</p>
+					<br>
+					<p style="margin-top: -2rem;">
+						<a href="doctorlogin"
+							style="text-decoration: underline; text-decoration-color: #0e6453; font-size: 1rem;">Already
+							a member as Doctor</a>
+					</p>
+
+				</form>
+			</div>
+			<div class="pic">
+				<img
+					src="<%= request.getContextPath() %>/assets/img/Sign up-bro.png"
+					alt="sign_up image">
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
 
 const passwordToggle = document.getElementById("passwordToggle");
 const toggleIcon = document.getElementById("toggleIcon");
@@ -130,7 +112,7 @@ PasswordToggle.addEventListener("click", () => {
   }
 });
     </script>
-    <script type="text/javascript">
+	<script type="text/javascript">
 	 const menu = document.querySelector("#menu-btn");
 	    const navbar = document.querySelector(".navbar");
 
@@ -145,5 +127,5 @@ PasswordToggle.addEventListener("click", () => {
 	    };
 	
 	</script>
-    </body>
+</body>
 </html>
