@@ -43,8 +43,8 @@
 
 	<jsp:include page="header.jsp"></jsp:include>
 	<%
-	User user1 = (User) request.getAttribute("userProfile");
-	if (user1 != null) {
+	User user2 = (User) request.getAttribute("userProfile");
+	if (user2 != null) {
 	%>
 	<div class="profile__content">
 		<div class="content__section">
@@ -53,14 +53,14 @@
 				<div class="section__row__column" id="text">
 					<div class="c-input c-input--text has-value">
 						<input id="name" name="first_name" type="text"
-							value="<%=user.getFirstName()%>"> <label for="name">
+							value="<%=user2.getFirstName()%>"> <label for="name">
 							First Name<span>*</span>
 						</label>
 
 					</div>
 					<div class="c-input c-input--text has-value">
 						<input id="name" name="last_name" type="text"
-							value="<%=user.getLastName() %>"> <label for="name">
+							value="<%=user2.getLastName() %>"> <label for="name">
 							Last Name<span>*</span>
 						</label>
 
@@ -72,14 +72,14 @@
 	<div>
 		<!-- Edit Profile Button -->
 		<button class="btn-1" id="editProfileBtn"
-			onclick="editProfile(<%= user.getId() %>)" type="sumbit">Edit
+			onclick="editProfile(<%= user2.getId() %>)" type="sumbit">Edit
 			Profile</button>
 		<form action="DeleteAccountServlet" method="post">
 			<input type="submit" name="deleteAccount" value="Delete My Account">
 		</form>
 
 		<!-- Delete Profile Button -->
-		<!-- <button  class = "btn-1"id="deleteProfileBtn" onclick="deleteProfile(<%= user.getId() %>)" type = "sumbit">Delete Profile</button> -->
+		<!-- <button  class = "btn-1"id="deleteProfileBtn" onclick="deleteProfile(<%= user2.getId() %>)" type = "sumbit">Delete Profile</button> -->
 
 
 	</div>

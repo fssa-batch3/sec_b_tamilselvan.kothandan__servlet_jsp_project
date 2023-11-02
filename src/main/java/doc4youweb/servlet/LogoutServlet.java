@@ -13,12 +13,13 @@ import javax.servlet.http.HttpSession;
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	request.getSession().removeAttribute("loggedUser");
-		request.getSession().invalidate();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    request.getSession().removeAttribute("loggedUser");
+	    request.getSession().invalidate();
 	    request.getSession().setAttribute("logoutMessage", "You have been successfully logged out");
 
-        response.sendRedirect(request.getContextPath() + "/index");
+	    // Redirect to a page that will display the confirmation message
+	    response.sendRedirect(request.getContextPath() + "/confirmation.jsp");
 	}
     
 	

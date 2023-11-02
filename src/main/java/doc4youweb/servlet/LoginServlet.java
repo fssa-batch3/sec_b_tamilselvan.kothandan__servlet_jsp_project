@@ -29,13 +29,13 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+		
+	
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String email = request.getParameter("email");
 	    String password = request.getParameter("password");
 
@@ -50,13 +50,20 @@ public class LoginServlet extends HttpServlet {
 			response.getWriter().print("</script>");
 	    } catch (DAOException e) {
 	        e.printStackTrace(); 
-	        response.getWriter().print("<script>alert('An error occurred while logging in.');");
-				response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/login\"");
-				response.getWriter().print("</script>");
+	        // Set an error message in the request
+	        request.setAttribute("notification", "An error occurred while logging in.");
+
+	        // Forward the request to the login.jsp
+	        request.getRequestDispatcher("/login.jsp").forward(request, response);
 	    } catch (ValidationException | ServiceException e) {
 	        request.setAttribute("errorMessage", e.getMessage());
-	        request.getRequestDispatcher("/login").forward(request, response);
+	        request.setAttribute("email", email);
+	        request.setAttribute("password", password);
+
+	        // Forward the request to the login.jsp
+	        request.getRequestDispatcher("/login.jsp").forward(request, response);
 	    }
 	}
+
 
 }

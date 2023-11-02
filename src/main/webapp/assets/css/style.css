@@ -21,7 +21,15 @@
       text-decoration: none;
   }
 
-
+.dataTables_wrapper .dataTables_filter input {
+	
+    border: 1px solid #0e6453;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: transparent;
+    color: inherit;
+    margin-left: -25px;
+}
 
   html {
       font-size: 62.5%;
@@ -1766,14 +1774,7 @@
           font-size: 1rem;
       }
       
-      #img, #p{
-    margin-left: 5rem;
-    width: 20rem;
-    height: 10rem;
-    text-align: center;
-    font-size: 1.3rem;
-    color: var(--green);
-}
+    
 
   }
   p.details{
@@ -2026,6 +2027,17 @@ h2 {
     font-size: 1.3rem;
     color: var(--green);
 }
+ @media only screen and (max-width: 480px) {
+	   #img, #p{
+    margin-left: 5rem;
+    width: 20rem;
+    height: 10rem;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--green);
+}
+	 
+ }
 
 /* Custom styling for checkboxes */
 input[type="checkbox"] {
@@ -2091,3 +2103,28 @@ input[type="checkbox"] {
 	  margin:160px auto;  
 	  }
   
+  /* Error message styling */
+
+.notification {
+  position: relative;
+  background-color:var(--green); /* Red background color for the notification */
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: space-between;
+}
+
+.error-message {
+  flex: 1;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  cursor: pointer;
+}

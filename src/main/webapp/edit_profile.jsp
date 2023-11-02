@@ -47,26 +47,27 @@
 
 	<%
 User user2 = (User) request.getSession().getAttribute("loggedUser");
-User user1 = null;
+User user3 = null;
 try {
-	user1 = UserService.getByUserEmail(user.getEmail());
+	user2 = UserService.getByUserEmail(user2.getEmail());
+;
 } catch (ValidationException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 
-request.setAttribute("userProfile", user1);
+request.setAttribute("userProfile", user2);
 %>
 
+<form action="profile/edit?id=<%=user2.getId() %>" method="post" id="edit_profile" style="margin-top: 200px;">
 
-	<form action="profile/edit?id=<%=user.getId() %>" method="post"
 		id="edit_profile" style="margin-top: 200px;">
 		<h1>Edit profile</h1>
 		<label>First name</label> <input type="text" name="firstName"
-			value="<%=user1.getFirstName()%>"> <label>last name</label> <input
-			type="text" name="lastName" value="<%= user1.getLastName()%>">
+			value="<%=user2.getFirstName()%>"> <label>last name</label> <input
+			type="text" name="lastName" value="<%= user2.getLastName()%>">
 		<label>password</label> <input type="text" name="password"
-			value="<%= user1.getPassword()%>">
+			value="<%= user2.getPassword()%>">
 		<button type="submit">Save Changes</button>
 	</form>
 

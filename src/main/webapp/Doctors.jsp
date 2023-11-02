@@ -35,9 +35,8 @@
 <body>
 	<%
     User user = (User) request.getAttribute("loggedUser");
-    HttpSession session1 = request.getSession(false); // Do not create a new session if it doesn't exist
-
-    if (session1 == null || session1.getAttribute("loggedUser") == null) {
+    
+    if (session.getAttribute("loggedUser") == null) {
         // Session is invalid or not present, display an alert and redirect to login page
 %>
 	<script>
@@ -93,7 +92,7 @@
 				<span><%= doctor.getDepartment() %></span>
 				<div>
 					<a
-						href="<%= request.getContextPath() %>/appointment/booknew?id=<%= doctor.getId() %>"
+						href="<%= request.getContextPath() %>/appointment/booknew?doctor_id=<%= doctor.getId()%>"
 						style="display: inline-block; margin-top: .5rem; padding: 5px 15px; background-color: white; border: 1.5px solid #0e6453; border-color: #0e6453; color: #0e6453; font-size: 10px; text-decoration: none; border-radius: 5px;">
 						Book Appointment </a>
 				</div>
@@ -103,7 +102,9 @@
 }
 %>
 		</div>
-
+<div style="display: flex; justify-content: center; align-items: center; ">
+  <button id="load-more-button" style="display: inline-block; padding: 15px 20px; background-color: white; border: 1.5px solid #0e6453; color: #0e6453; font-size: 16px; text-decoration: none; border-radius: 5px;">Load More</button>
+</div>
 	</section>
 
 	<section class="footer">
@@ -139,6 +140,42 @@ function search() {
 
 
 </script>
+
+<script>
+  // Initialize some variables
+  let visibleDoctors = 6; // Number of doctors to initially display
+  const doctors = document.querySelectorAll(".Box");
+  const loadMoreButton = document.getElementById("load-more-button");
+
+  // Function to hide or show doctors based on the current visibility count
+  function toggleDoctorsVisibility() {
+    for (let i = 0; i < doctors.length; i++) {
+      if (i < visibleDoctors) {
+        doctors[i].style.display = "block";
+      } else {
+        doctors[i].style.display = "none";
+      }
+    }
+  }
+
+  // Initial visibility setup
+  toggleDoctorsVisibility();
+
+  // Function to load more doctors
+  function loadMoreDoctors() {
+    visibleDoctors += 6; // Increase the number of visible doctors
+    toggleDoctorsVisibility();
+
+    // Check if all doctors are now visible, and hide the "Load More" button if needed
+    if (visibleDoctors >= doctors.length) {
+      loadMoreButton.style.display = "none";
+    }
+  }
+
+  // Add a click event listener to the "Load More" button
+  loadMoreButton.addEventListener("click", loadMoreDoctors);
+</script>
+
 
 	<script type="text/javascript">
 	 const menu = document.querySelector("#menu-btn");

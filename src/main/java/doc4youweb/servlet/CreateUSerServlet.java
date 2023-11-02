@@ -22,73 +22,85 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 	dispatcher.forward(request, response);
 
 }
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		User user = new User();
-		
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    User user = new User();
+    String firstName = request.getParameter("first_name");
+    String lastName = request.getParameter("last_name");
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
 
-		try {
-			boolean validationError = false;
+    try {
+        boolean validationError = false;
 
-			String firstName = request.getParameter("first_name");
+        // Validate first name
+       
+        if (firstName == null) {
+            validationError = true;
+            request.setAttribute("errorMessage", "First name cannot be null.");
+        } else if (firstName.isEmpty()) {
+            validationError = true;
+            request.setAttribute("errorMessage", "First name cannot be empty.");
+        } else {
+            user.setFirstName(firstName);
+        }
 
-			if (firstName == null) {
-				System.out.println("first_name cannot be null or empty");
-			} else if (firstName.isEmpty()) {
-				System.out.println("first_name cannot be empty");
-			} else {
-				user.setFirstName(firstName);
-			}
-String lastname = request.getParameter("last_name");
+        // Validate last name
+      
+        if (lastName == null) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Last name cannot be null.");
+        } else if (lastName.isEmpty()) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Last name cannot be empty.");
+        } else {
+            user.setLastName(lastName);
+        }
 
-if (lastname == null) {
-	System.out.println("last_name cannot be null or empty");
-} else if (lastname.isEmpty()) {
-	System.out.println("last_name cannot be empty");
-} else {
-	user.setLastName(lastname);
+        // Validate email
+       
+        if (email == null) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Email cannot be null.");
+        } else if (email.isEmpty()) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Email cannot be empty.");
+        } else {
+            user.setEmail(email);
+        }
+
+        // Validate password
+       
+        if (password == null) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Password cannot be null.");
+        } else if (password.isEmpty()) {
+            validationError = true;
+            request.setAttribute("errorMessage", "Password cannot be empty.");
+        } else {
+            user.setPassword(password);
+        }
+
+        if (validationError) {
+            request.getRequestDispatcher("/sign_in.jsp").forward(request, response);
+        } else {
+            UserService userService = new UserService();
+            userService.createUser(user);
+            request.setAttribute("errorMesssage", "User registered successfully!");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+    } catch (Exception e) {
+        
+        String errorMessage = "An error occurred: " + e.getMessage();
+        request.setAttribute("errorMessage", errorMessage);
+        request.setAttribute("first_name", firstName);
+        request.setAttribute("last_name", lastName);
+        request.setAttribute("email", email);
+        request.setAttribute("password", password);
+
+        // Forward to the login page
+        request.getRequestDispatcher("/sign_in.jsp").forward(request, response);
+    }
 }
 
-String email = request.getParameter("email");
-
-if (email == null) {
-	System.out.println("email cannot be null or empty");
-} else if (email.isEmpty()) {
-	System.out.println("email cannot be empty");
-} else {
-	user.setEmail(email);
-}
-
-String password = request.getParameter("password");
-
-if (password == null) {
-	System.out.println("password cannot be null or empty");
-} else if (password.isEmpty()) {
-	System.out.println("password cannot be empty");
-} else {
-	user.setPassword(password);
-}
-			
-
-			System.out.println(user.toString());
-
-
-			try {
-
-				UserService userService = new UserService();
-				userService.createUser(user);
-				response.getWriter().print("<script>alert('User registered successfully !');");
-				response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/login\"");
-				response.getWriter().print("</script>");
-			} catch (ValidationException e) {
-				PrintWriter out = response.getWriter();
-				String jsCode = "<script>alert('" + e.getMessage() + "');</script>";
-				out.println(jsCode);
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-}
 }

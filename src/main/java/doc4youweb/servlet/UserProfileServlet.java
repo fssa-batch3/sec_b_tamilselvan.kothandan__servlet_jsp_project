@@ -42,7 +42,8 @@ public class UserProfileServlet extends HttpServlet {
 		}
         // Set the user object as an attribute to pass to the JSP
         request.setAttribute("userProfile", user1);
-    	System.out.println("hello world");
+    	
+    	
         // Forward the request to the viewProfile.jsp page
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
 	}

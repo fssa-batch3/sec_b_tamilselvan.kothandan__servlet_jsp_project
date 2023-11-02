@@ -41,37 +41,64 @@ public class DoctorLoginServlet extends HttpServlet {
 	 */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Retrieve user input from the login form
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+
+        // Create a service to handle doctor-related operations
         DoctorService doctorService = new DoctorService();
         DoctorDTO doctor;
+        
+        String errorMessage = ""; // Initialize the error message
 
         try {
             doctor = doctorService.getDoctorByEmail(email);
-        } catch (ValidationException e) {
-            // Set error message in session
-            request.getSession().setAttribute("errorMessage", "No user exists");
-            response.sendRedirect(request.getContextPath() + "/Doctor_signup.jsp");
-            return;
+            HttpSession doctorLogin = request.getSession();
+
+            if (doctor == null) {
+                throw new ValidationException("Doctor Details Not Found");
+            }
+
+            if (password.equals(doctor.getPassword())) {
+                // Successful login
+                doctorLogin.setAttribute("logged_email", email);
+                doctorLogin.setAttribute("logged_doctor", doctor);
+                doctorLogin.setAttribute("logged_doctor_user_id", doctor.getId());
+                doctorLogin.setAttribute("logged_doctor_doctor_id", doctor.getDoctorId());
+
+                response.getWriter().print("<script>alert('Doctor logged in  Successfully !');");
+    			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctor_appointment\"");
+    			response.getWriter().print("</script>");;
+            } else {
+                // Incorrect credentials
+                errorMessage = "Incorrect email or password";
+                request.setAttribute("errorMessage", errorMessage);
+                request.setAttribute("email", email);
+                request.setAttribute("password", password);
+
+                // Forward to the login page
+                request.getRequestDispatcher("/Doctor_signup.jsp").forward(request, response);
+            }
+        
+        } catch (Exception e) {
+            // Handle other exceptions
+            errorMessage = "An error occurred: " + e.getMessage();
+         // Set the error message in request attribute
+            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+
+            // Forward to the login page
+            request.getRequestDispatcher("/Doctor_signup.jsp").forward(request, response);
         }
 
-        HttpSession doctorLogin = request.getSession();
-        if (password.equals(doctor.getPassword())) {
-            doctorLogin.setAttribute("logged_email", email);
-            doctorLogin.setAttribute("logged_doctor", doctor);
-            doctorLogin.setAttribute("logged_doctor_user_id", doctor.getId());
-            doctorLogin.setAttribute("logged_doctor_doctor_id", doctor.getDoctorId());
-
-            response.getWriter().print("<script>alert('Doctor logged in  Successfully !');");
-			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctor_appointment\"");
-			response.getWriter().print("</script>");;
-        } else {
-            // Set error message in session
-        	response.getWriter().print("<script>alert('Incorrect password');");
-			response.getWriter().print("window.location.href=\"" + request.getContextPath() + "/doctorlogin\"");
-			response.getWriter().print("</script>");
-        }
+        
     }
 
-	}
+
+}
+
+
+
+
 

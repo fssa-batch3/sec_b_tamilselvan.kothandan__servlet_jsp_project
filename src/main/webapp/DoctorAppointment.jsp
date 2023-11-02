@@ -20,7 +20,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
 	integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
 	crossorigin="anonymous" referrerpolicy="no-referrer">
-
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath() %>/assets/css/style.css">
 </head>
@@ -50,7 +50,7 @@
 		</a>
 
 		<nav class="navbar">
-			<a href="doctorLogout">logout</a> <a href="doctor_profile">Profile</a>
+			<a href="doctorLogout">logout</a> 
 		</nav>
 		<div id="menu-btn" class="fas fa-bars"></div>
 
@@ -65,8 +65,8 @@
 
 	<section>
 		<div style="overflow-x: auto;">
-			<table border="1">
-
+			<table border="1" id="appoointment-table">
+<thead>
 				<tr>
 					<th>Appointment ID</th>
 					<th>Patient Name</th>
@@ -75,6 +75,8 @@
 					<th>Status</th>
 					<th>progress</th>
 				</tr>
+				</thead>
+				<tbody>
 				<c:forEach items="${appointments}" var="appointment">
 					<tr>
 						<td>${appointment.id}</td>
@@ -112,6 +114,7 @@
 
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 			<!-- Check if there are no appointments to display -->
 			<c:if test="${empty appointments}">
@@ -140,6 +143,10 @@
 	    };
 	
 	</script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$("#appoointment-table").DataTable();
+</script>
 </body>
 </html>
